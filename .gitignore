@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+
+clients/*/data/input/*.csv
+clients/*/output/
+shared/reference/*.xlsx
+
+*.xlsx
+!shared/reference/*.xlsx
+
+.env
+.venv/

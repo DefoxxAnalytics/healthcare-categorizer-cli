@@ -1,0 +1,1352 @@
+# CCHMC Context-Aware Refinement Rules
+# Applied to rows with ambiguous SC codes to provide more granular classification.
+#
+# Order of application:
+#   1. supplier_rules  — SC code + supplier name regex (strongest signal)
+#   2. keyword_rules.yaml — existing generic rules on Supplier + Line Memo
+#   3. context_rules  — SC code + Line of Service (broad but always available)
+#   4. ambiguous SC fallback — generic mapping at low confidence
+
+# ---------------------------------------------------------------------------
+# SUPPLIER RULES
+# Scoped to specific SC codes. Supplier name is matched case-insensitive.
+# ---------------------------------------------------------------------------
+supplier_rules:
+
+  # --- SC0250 Contracted Services: IT vendors ---
+  - sc_codes: [SC0250, SC0271, SC0272, SC0291, SC0389]
+    supplier_pattern: "epic systems|workday|amazon web services|cloud 2|encore technologies|salesforce|servicenow|oracle|microsoft|zoom|webex|citrix|vmware|crowdstrike|palo alto|fortinet|splunk|tecsys"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.90
+
+  - sc_codes: [SC0250, SC0271, SC0272]
+    supplier_pattern: "experian health|waystar|nthrive|r1 rcm|cotiviti|change healthcare"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+
+  # --- SC0250 Contracted Services: Financial/audit ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "kpmg|deloitte|ernst.*young|pricewaterhouse|pwc|pnc bank|grant thornton"
+    taxonomy_key: "Professional Services > Financial Services > Accounting Services > General Accounting Services"
+    confidence: 0.90
+
+  # --- SC0250 Contracted Services: HR/Staffing ---
+  - sc_codes: [SC0250, SC0271, SC0255]
+    supplier_pattern: "cielo|alight solutions|robert half|kelly service|adecco|manpower|hays|randstad|cross country"
+    taxonomy_key: "Human Resources > Resourcing > Contractors"
+    confidence: 0.90
+
+  # --- SC0250 Contracted Services: Legal ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "law firm|attorney|legal.*group|taft.*stettinius|keating.*muething|frost brown|dinsmore.*shohl|squire patton"
+    taxonomy_key: "Professional Services > Legal > Legal Services"
+    confidence: 0.90
+
+  # --- SC0250 Contracted Services: Medical/Research services ---
+  - sc_codes: [SC0250, SC0271, SC0296]
+    supplier_pattern: "national marrow donor|transmedics|uc health|university hospital|broad institute|lindner center|trihealth"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.85
+
+  # --- SC0250 Contracted Services: Construction/Facilities ---
+  - sc_codes: [SC0250, SC0271, SC0548]
+    supplier_pattern: "triversity|messer|turner construction|skanska|gilbane|whiting-turner|bruns.*general|dugan.*meyers"
+    taxonomy_key: "Facilities > Construction Services"
+    confidence: 0.90
+
+  # --- SC0250/SC0271: Insurance/Risk ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "risk strategies|marsh.*mclennan|aon|willis towers|gallagher|lockton"
+    taxonomy_key: "Professional Services > Insurance > Business Insurance"
+    confidence: 0.88
+
+  # --- SC0250: Consulting (management) ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "gallup|mckinsey|bcg|bain.*company|accenture|vizient|protiviti"
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.88
+
+  # --- SC0004/SC0506/SC0193/SC0194/SC0389 Minor/Capital Equipment: IT ---
+  - sc_codes: [SC0004, SC0506, SC0193, SC0194, SC0389]
+    supplier_pattern: "encore technologies|dell.*financial|dell.*technolog|cdw|graybar electric|american sound.*electronic|sonance|transact campus|hewlett|lenovo|cisco|apple.*inc"
+    taxonomy_key: "IT & Telecoms > IT Hardware > Laptop/Desktop"
+    confidence: 0.88
+
+  # --- SC0004/SC0389 Minor/Capital Equipment: Medical devices ---
+  - sc_codes: [SC0004, SC0506, SC0193, SC0194, SC0389]
+    supplier_pattern: "medline|philips healthcare|ge healthcare|ge medical|siemens medical|welch allyn|hill rom|zoll medical|steris|cme corp|elite biomedical|pioneer biomedical|medela|stryker|baxter|draeger|drager|masimo|nihon kohden|mindray|varian medical"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.90
+
+  # --- SC0004 Minor Equipment: Furniture ---
+  - sc_codes: [SC0004, SC0506, SC0193, SC0194]
+    supplier_pattern: "river city furniture|herman miller|steelcase|haworth|knoll|kimball|national office"
+    taxonomy_key: "Facilities > Furniture"
+    confidence: 0.90
+
+  # --- SC0004 Minor Equipment: Lab equipment ---
+  - sc_codes: [SC0004, SC0506, SC0193, SC0194, SC0389]
+    supplier_pattern: "fisher scientific|thermo fisher|agilent|beckman coulter|bio-rad|eppendorf|corning|illumina|10x genomics|perkin.*elmer|revvity"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.88
+
+  # --- SC0175/SC0172/SC0174 Consumable Supplies: Lab reagents/consumables ---
+  - sc_codes: [SC0175, SC0172, SC0174, SC0207, SC0341]
+    supplier_pattern: "illumina|10x genomics|life technologies|invitrogen|fisher scientific|miltenyi biotec|stemcell technolog|agilent|bd biosciences|sigma.aldrich|integrated dna|r&d systems|agena bioscience|revvity|abbott molecular|oxford gene|cyv[eo]k|diapharma|life science products|seastar medical|bio.rad|eppendorf|corning|new england biolabs|promega|qiagen|roche.*diagnostics|applied biosystems|beckman coulter|perkin.*elmer|jackson immunoresearch|cell signaling"
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.90
+
+  # --- SC0175 Consumable Supplies: Clinical/medical supplies ---
+  - sc_codes: [SC0175, SC0172, SC0174, SC0207, SC0341]
+    supplier_pattern: "medline|cardinal health|siemens healthcare diagnostics|performance health|mckesson|owens.*minor|henry schein"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.88
+
+  # --- SC0175 Consumable Supplies: Gas/industrial ---
+  - sc_codes: [SC0175, SC0172, SC0174]
+    supplier_pattern: "linde gas|airgas|praxair|air liquide"
+    taxonomy_key: "Medical > Medical Consumables > Medical Gas"
+    confidence: 0.88
+
+  # --- SC0175 Consumable Supplies: Office/janitorial ---
+  - sc_codes: [SC0175, SC0172, SC0174, SC0207, SC0004, SC0506, SC0551]
+    supplier_pattern: "guy brown|phillips supply|unifirst|cintas"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.80
+
+  # --- SC0250/SC0271: Pharmacy services ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "walgreens|cvs.*health|omnicare|pharmerica|cardinal health.*pharma"
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 0.85
+
+  # --- SC0250/SC0271/SC0374: Research-specific services ---
+  - sc_codes: [SC0250, SC0271, SC0296, SC0374, SC0524]
+    supplier_pattern: "university of cincinnati"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.80
+
+  # --- SC0250 Furniture in contracted services ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "river city furniture"
+    taxonomy_key: "Facilities > Furniture"
+    confidence: 0.90
+
+  # =========================================================================
+  # PHASE 3 REFINEMENT RULES (v3)
+  # Added based on Quick Review analysis of 10,560 ambiguous rows.
+  # =========================================================================
+
+  # --- SC0389 Capital Equipment: Medical equipment vendors ---
+  - sc_codes: [SC0389]
+    supplier_pattern: "olympus america|karl storz|cadwell|react health|howard medical|getinge|medtronic|solaire medical|sentec|arjo|laerdal|gaumard|natus medical|brainlab|erbe usa|laborie|integra lifesciences|verathon|belmont medical|carestream|desoutler|optos|bio merieux"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.90
+
+  # --- SC0389 Capital Equipment: Lab equipment vendors ---
+  - sc_codes: [SC0389]
+    supplier_pattern: "bruker|phc corporation|animal care systems|baker company|leica microsystems|s2 genomics|tucker-davis|waters corporation|wyatt technology|nanotemper|helmer|formlabs|d.a.i. scientific|sebia|global life sciences|integra biosciences|particle metrix"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.88
+
+  # --- SC0389 Capital Equipment: Construction/facilities vendors ---
+  - sc_codes: [SC0389]
+    supplier_pattern: "prus construction|fishel company|ferguson|hilltop basic|riegler blacktop|petersen aluminum|terracon|gbbn|hks|division 4|e3 gordon|cutting edge woodworks|f d lawrence|archiable|united building|weathershield|trulite glass"
+    taxonomy_key: "Facilities > Construction Services"
+    confidence: 0.90
+
+  # --- SC0389 Capital Equipment: IT software vendors ---
+  - sc_codes: [SC0389]
+    supplier_pattern: "ukg|kronos|vision technologies|intelligent video|hyland software|sigital|crystal communication"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+
+  # --- SC0389 Capital Equipment: Consulting ---
+  - sc_codes: [SC0389]
+    supplier_pattern: "protiviti|huron consulting|navigant"
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.88
+
+  # --- SC0389 Capital Equipment: Furniture vendors ---
+  - sc_codes: [SC0389]
+    supplier_pattern: "intermetro|hard manufacturing|logiquip|standard textile|atr distributing"
+    taxonomy_key: "Facilities > Furniture"
+    confidence: 0.88
+
+  # --- SC0076 Outside Salaries: UC entities (separate legal entity, external staff) ---
+  - sc_codes: [SC0076]
+    supplier_pattern: "university of cincinnati|uc health|uc physician"
+    taxonomy_key: "Human Resources > Resourcing > Contractors"
+    confidence: 0.85
+
+  # --- SC0076 Outside Salaries: Consulting firms ---
+  - sc_codes: [SC0076]
+    supplier_pattern: "protiviti"
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.88
+
+  # --- SC0076 Outside Salaries: Staffing agencies ---
+  - sc_codes: [SC0076]
+    supplier_pattern: "insight global"
+    taxonomy_key: "Human Resources > Resourcing > Contractors"
+    confidence: 0.88
+
+  # --- SC0076 Outside Salaries: Other universities ---
+  - sc_codes: [SC0076]
+    supplier_pattern: "university of michigan|university of texas|miami university|the regents"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.80
+
+  # --- SC0250 Contracted Services: Access staffing ---
+  - sc_codes: [SC0250]
+    supplier_pattern: "^access$"
+    taxonomy_key: "Human Resources > Resourcing > Contractors"
+    confidence: 0.85
+
+  # --- SC0250 Contracted Services: Medical reference/software ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "uptodate|wolters kluwer"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+
+  # --- SC0250/SC0004 Contracted Services: Facilities management ---
+  - sc_codes: [SC0250, SC0271, SC0004, SC0172, SC0175, SC0341]
+    supplier_pattern: "crothall"
+    taxonomy_key: "Facilities > Cleaning > Cleaning Services"
+    confidence: 0.85
+
+  # --- SC0250 Contracted Services: Financial services ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "ubs|ubs financial"
+    taxonomy_key: "Professional Services > Financial Services > Accounting Services > General Accounting Services"
+    confidence: 0.85
+
+  # --- SC0250 Contracted Services: Water treatment/facilities ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "ameri water|nalco|ecolab"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.85
+
+  # --- SC0341 Medical Consumables: Avanos ---
+  - sc_codes: [SC0341]
+    supplier_pattern: "avanos"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.88
+
+  # --- SC0341 Medical Consumables: Medical device suppliers ---
+  - sc_codes: [SC0341]
+    supplier_pattern: "angiodynamics|clinical technology|pediavascular|argon medical|covidien|atos medical|microtek medical|cook medical|teleflex|merit medical"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.88
+
+  # --- SC0341 Medical Consumables: Fisher Healthcare (not Fisher Scientific) ---
+  - sc_codes: [SC0341]
+    supplier_pattern: "fisher healthcare"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.88
+
+  # --- SC0004/SC0207/SC0341: Pediatric patient rewards/novelty ---
+  - sc_codes: [SC0004, SC0207, SC0341]
+    supplier_pattern: "smile makers|fun express|oriental trading|s&s worldwide|s & s worldwide|rhode island novelty"
+    taxonomy_key: "Marketing > Merchandising > Promotional Items"
+    confidence: 0.80
+
+  # --- SC0004 Minor Equipment: Signage/facility supplies ---
+  - sc_codes: [SC0004]
+    supplier_pattern: "plastigraphics"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.85
+
+  # --- SC0004 Minor Equipment: Office/shipping supplies ---
+  - sc_codes: [SC0004, SC0207, SC0175, SC0341]
+    supplier_pattern: "uline"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.85
+
+  # --- SC0207 Misc Supplies: Water service ---
+  - sc_codes: [SC0207]
+    supplier_pattern: "alpine valley water|absopure|culligan"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.80
+
+  # --- Grainger (industrial/MRO supplies) ---
+  - sc_codes: [SC0506, SC0004, SC0175, SC0207]
+    supplier_pattern: "grainger"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.85
+
+  # --- SC0172: Cleaning supplies ---
+  - sc_codes: [SC0172]
+    supplier_pattern: "j & s soap"
+    taxonomy_key: "Facilities > Cleaning > Cleaning Supplies"
+    confidence: 0.85
+
+  # --- SC0551: Print services ---
+  - sc_codes: [SC0551]
+    supplier_pattern: "printondemand|print on demand"
+    taxonomy_key: "Marketing > Merchandising > Promotional Items"
+    confidence: 0.85
+
+  # =========================================================================
+  # PHASE 4 ENRICHMENT RULES (v4)
+  # Generated from web-enriched supplier lookup of Quick Review suppliers.
+  # =========================================================================
+
+  # --- SC0250/SC0271 IT Software (healthcare IT, SaaS, enterprise) ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "ghx|global healthcare exchange|merative|hippocratic ai|arisglobal|docusign|efax|adp|velocityehs|optum360|simplified clinical data|hyland"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.82
+
+  # --- SC0250/SC0271 Telecom providers ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "charter communications"
+    taxonomy_key: "IT & Telecoms > Telecoms"
+    confidence: 0.85
+
+  # --- SC0004/SC0562 Supply chain IT ---
+  - sc_codes: [SC0004, SC0562]
+    supplier_pattern: "tecsys"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.85
+
+  # --- SC0004 IT Hardware: Managed print services ---
+  - sc_codes: [SC0004]
+    supplier_pattern: "woodhull"
+    taxonomy_key: "IT & Telecoms > IT Hardware > Laptop/Desktop"
+    confidence: 0.80
+
+  # --- SC0271 IT Hardware: Printers/copiers ---
+  - sc_codes: [SC0271]
+    supplier_pattern: "ricoh"
+    taxonomy_key: "IT & Telecoms > IT Hardware > Laptop/Desktop"
+    confidence: 0.82
+
+  # --- SC0250 IT Software: Crystal Communication (extend from SC0389) ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "crystal communication"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.85
+
+  # --- SC0389/SC0250 Lab equipment vendors ---
+  - sc_codes: [SC0389, SC0250]
+    supplier_pattern: "bd biosciences|hitachi high-tech|nikon instruments|life technologies|invitrogen|agena bioscience"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.85
+
+  # --- SC0193/SC0389 Lab equipment: Qiagen ---
+  - sc_codes: [SC0193, SC0389]
+    supplier_pattern: "qiagen"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.85
+
+  # --- SC0389 Medical devices ---
+  - sc_codes: [SC0389]
+    supplier_pattern: "restorative therapies|abbott.*i-stat|acclaro|performance health"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.85
+
+  # --- SC0271 Medical equipment: Olympus (extend from SC0389) ---
+  - sc_codes: [SC0271]
+    supplier_pattern: "olympus america"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.90
+
+  # --- SC0250/SC0255/SC0271 Medical services (behavioral health, organ procurement, labs) ---
+  - sc_codes: [SC0250, SC0255, SC0271]
+    supplier_pattern: "child focus|pressley ridge|network for hope|donor alliance|midwest transplant|quest diagnostics|bethesda healthcare|child health corp"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.80
+
+  # --- SC0250/SC0271 HR/Staffing ---
+  - sc_codes: [SC0250, SC0271]
+    supplier_pattern: "roguehire|background investigation bureau|vaco"
+    taxonomy_key: "Human Resources > Resourcing > Contractors"
+    confidence: 0.78
+
+  # --- SC0250 Legal services ---
+  - sc_codes: [SC0250]
+    supplier_pattern: "legal aid society"
+    taxonomy_key: "Professional Services > Legal > Legal Services"
+    confidence: 0.80
+
+  # --- SC0250/SC0271/SC0389 Security systems integration ---
+  - sc_codes: [SC0250, SC0271, SC0389]
+    supplier_pattern: "convergint"
+    taxonomy_key: "Facilities > Facilities Services > Security"
+    confidence: 0.82
+
+
+  # =========================================================================
+  # PHASE 5 PARALLEL AGENT RULES (v5)
+  # 164 supplier rules generated by parallel classification agents from
+  # Quick Review analysis of 200 suppliers (~$9.3M spend).
+  # =========================================================================
+
+  # --- Facilities ---
+  - sc_codes: [SC0175]
+    supplier_pattern: "superior janitor"
+    taxonomy_key: "Facilities > Cleaning > Cleaning Supplies"
+    confidence: 0.9
+  - sc_codes: [SC0004]
+    supplier_pattern: "fluke"
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0004]
+    supplier_pattern: "nexxspan"
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment"
+    confidence: 0.82
+  - sc_codes: [SC0389]
+    supplier_pattern: "trimark"
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment > Kitchen Equipment"
+    confidence: 0.9
+  - sc_codes: [SC0004]
+    supplier_pattern: "hoshizaki"
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment > Kitchen Equipment"
+    confidence: 0.9
+  - sc_codes: [SC0389]
+    supplier_pattern: "douglas equipment"
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment > Kitchen Equipment"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "riverside electric"
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance > Electrical Services"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "ambius"
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance > Interior Plant Services"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "twin tree care"
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance > Landscaping Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "eat well"
+    taxonomy_key: "Facilities > Facilities Services > Catering > Catering Services"
+    confidence: 0.82
+  - sc_codes: [SC0004]
+    supplier_pattern: "metrasens"
+    taxonomy_key: "Facilities > Facilities Services > Security > Security Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0004, SC0389]
+    supplier_pattern: "lab crafters"
+    taxonomy_key: "Facilities > Furniture"
+    confidence: 0.85
+  - sc_codes: [SC0004, SC0172, SC0174, SC0175, SC0207, SC0291, SC0341, SC0374, SC0506, SC0524, SC0551, SC0582]
+    supplier_pattern: 'amazon\.com'
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0004, SC0172, SC0175, SC0207, SC0506]
+    supplier_pattern: "health care logistics"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0207]
+    supplier_pattern: "veloxity"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.8
+  - sc_codes: [SC0004, SC0207, SC0582]
+    supplier_pattern: "banz studios"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "cushman.*wakefield"
+    taxonomy_key: "Facilities > Real Estate > Property"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "ricore investments"
+    taxonomy_key: "Facilities > Real Estate > Property"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "basement doctor"
+    taxonomy_key: "Facilities > Real Estate > Property"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "building value"
+    taxonomy_key: "Facilities > Real Estate > Property"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "^shp$"
+    taxonomy_key: "Facilities > Real Estate > Property"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "gcoh lessee"
+    taxonomy_key: "Facilities > Real Estate > Property > Property Lease"
+    confidence: 0.8
+  - sc_codes: [SC0004, SC0250]
+    supplier_pattern: "duke energy"
+    taxonomy_key: "Facilities > Utilities > Electricity"
+    confidence: 0.9
+  - sc_codes: [SC0389]
+    supplier_pattern: "columbia chevrolet"
+    taxonomy_key: "Facilities > Vehicles > Vehicle Purchase"
+    confidence: 0.9
+  - sc_codes: [SC0389]
+    supplier_pattern: "kings chrysler"
+    taxonomy_key: "Facilities > Vehicles > Vehicle Purchase"
+    confidence: 0.9
+
+  # --- Finance ---
+  - sc_codes: [SC0250]
+    supplier_pattern: "children's miracle network"
+    taxonomy_key: "Finance > Donations"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "united way"
+    taxonomy_key: "Finance > Donations"
+    confidence: 0.85
+  - sc_codes: [SC0341]
+    supplier_pattern: "united states treasury"
+    taxonomy_key: "Finance > Fees > Government Fees"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "city of cincinnati"
+    taxonomy_key: "Finance > Fees > Government Fees"
+    confidence: 0.88
+
+  # --- Human Resources ---
+  - sc_codes: [SC0250, SC0291, SC0341, SC0582]
+    supplier_pattern: "live technologies holdings"
+    taxonomy_key: "Human Resources > Employee Benefits > Employee Recognition"
+    confidence: 0.8
+  - sc_codes: [SC0004, SC0175, SC0207, SC0291]
+    supplier_pattern: "boost engagement"
+    taxonomy_key: "Human Resources > Employee Benefits > Employee Recognition"
+    confidence: 0.8
+  - sc_codes: [SC0207, SC0250, SC0291]
+    supplier_pattern: "accent on cincinnati"
+    taxonomy_key: "Human Resources > Employee Benefits > Employee Recognition"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "center for creative leadership"
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "cornell university"
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "depaul cristo rey"
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.78
+  - sc_codes: [SC0076]
+    supplier_pattern: "cincytech"
+    taxonomy_key: "Human Resources > Resourcing > Contractors"
+    confidence: 0.85
+  - sc_codes: [SC0076]
+    supplier_pattern: "sahlgrenska"
+    taxonomy_key: "Human Resources > Resourcing > Contractors"
+    confidence: 0.85
+  - sc_codes: [SC0076, SC0272]
+    supplier_pattern: "aclaim"
+    taxonomy_key: "Human Resources > Resourcing > Contractors"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "hsd metrics"
+    taxonomy_key: "Human Resources > Resourcing > Engagement Survey"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "quantum workplace"
+    taxonomy_key: "Human Resources > Resourcing > Engagement Survey"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "lee hecht harrison"
+    taxonomy_key: "Human Resources > Resourcing > Recruitment"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "russell reynolds"
+    taxonomy_key: "Human Resources > Resourcing > Recruitment > Permanent Recruitment"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "indeed"
+    taxonomy_key: "Human Resources > Resourcing > Recruitment > Recruitment Advertising"
+    confidence: 0.9
+
+  # --- IT & Telecoms ---
+  - sc_codes: [SC0004]
+    supplier_pattern: "olea kiosks"
+    taxonomy_key: "IT & Telecoms > IT Hardware"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "ikon office"
+    taxonomy_key: "IT & Telecoms > IT Hardware > Printer, Copier, Scanner"
+    confidence: 0.82
+  - sc_codes: [SC0250]
+    supplier_pattern: "prestige audio visual"
+    taxonomy_key: "IT & Telecoms > IT Services > Audio / Visual Conferencing"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "icertis"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "asana"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "sitecore"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "siteimprove"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "pitchbook data"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "symplr"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "clarivate"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "poppulo"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "foleon"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "learnupon"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "innovaccer"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "ce broker"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.85
+  - sc_codes: [SC0271]
+    supplier_pattern: "greenphire"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "experian employer"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "easymail"
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "nuance communications"
+    taxonomy_key: "IT & Telecoms > Software > Medical Software"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "body interact"
+    taxonomy_key: "IT & Telecoms > Software > Medical Software"
+    confidence: 0.88
+  - sc_codes: [SC0250, SC0562]
+    supplier_pattern: "windstream"
+    taxonomy_key: "IT & Telecoms > Telecoms"
+    confidence: 0.9
+
+  # --- Marketing ---
+  - sc_codes: [SC0207, SC0291]
+    supplier_pattern: "cincinnati reds"
+    taxonomy_key: "Marketing > Advertising > Sponsorships"
+    confidence: 0.85
+  - sc_codes: [SC0291, SC0341]
+    supplier_pattern: "fc cincinnati"
+    taxonomy_key: "Marketing > Advertising > Sponsorships"
+    confidence: 0.82
+  - sc_codes: [SC0250]
+    supplier_pattern: "cincinnati arts association"
+    taxonomy_key: "Marketing > Advertising > Sponsorships"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "wg content"
+    taxonomy_key: "Marketing > Advertising Agency Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "hanna bihn"
+    taxonomy_key: "Marketing > Advertising Agency Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "swash.*dot"
+    taxonomy_key: "Marketing > Advertising Agency Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "nightowl creative"
+    taxonomy_key: "Marketing > Advertising Agency Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "hedy.*hopp"
+    taxonomy_key: "Marketing > Advertising Agency Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "sunny blu"
+    taxonomy_key: "Marketing > Advertising Agency Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "maker creative"
+    taxonomy_key: "Marketing > Advertising Agency Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "healthlink dimensions"
+    taxonomy_key: "Marketing > Market Research"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "kate harold"
+    taxonomy_key: "Marketing > Media and Communications"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "calvert communications"
+    taxonomy_key: "Marketing > Media and Communications"
+    confidence: 0.82
+  - sc_codes: [SC0250]
+    supplier_pattern: "sesh communications"
+    taxonomy_key: "Marketing > Media and Communications"
+    confidence: 0.82
+  - sc_codes: [SC0250]
+    supplier_pattern: "meltwater"
+    taxonomy_key: "Marketing > PR"
+    confidence: 0.9
+  - sc_codes: [SC0004, SC0207, SC0250, SC0291, SC0341]
+    supplier_pattern: "harlan graphic"
+    taxonomy_key: "Marketing > Print > Print Services > Printing & Copying Services"
+    confidence: 0.85
+  - sc_codes: [SC0524]
+    supplier_pattern: "tuttle communications"
+    taxonomy_key: "Marketing > Publications"
+    confidence: 0.82
+
+  # --- Medical ---
+  - sc_codes: [SC0389]
+    supplier_pattern: "leica.*biosystems"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.9
+  - sc_codes: [SC0389]
+    supplier_pattern: "applied biophysics"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.88
+  - sc_codes: [SC0389]
+    supplier_pattern: "nanoentek"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.88
+  - sc_codes: [SC0389]
+    supplier_pattern: "mechatronics instruments"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0004]
+    supplier_pattern: "euthanex"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0562]
+    supplier_pattern: "novogene"
+    taxonomy_key: "Medical > Laboratory > Laboratory Services"
+    confidence: 0.88
+  - sc_codes: [SC0207, SC0250]
+    supplier_pattern: "antibodies.online"
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.9
+  - sc_codes: [SC0207, SC0341, SC0389]
+    supplier_pattern: "thomas scientific"
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.88
+  - sc_codes: [SC0207, SC0582]
+    supplier_pattern: "lemaitre vascular"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.88
+  - sc_codes: [SC0175]
+    supplier_pattern: "patient shield"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.85
+  - sc_codes: [SC0175, SC0341]
+    supplier_pattern: "willis distributing"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.78
+  - sc_codes: [SC0004]
+    supplier_pattern: "biodex"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.9
+  - sc_codes: [SC0389]
+    supplier_pattern: "compumedics"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.9
+  - sc_codes: [SC0389]
+    supplier_pattern: "bk medical"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.9
+  - sc_codes: [SC0004, SC0341, SC0389]
+    supplier_pattern: "icu medical"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.9
+  - sc_codes: [SC0341, SC0389]
+    supplier_pattern: "midwest medical systems"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.88
+  - sc_codes: [SC0389]
+    supplier_pattern: "premier ophthalmic"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.88
+  - sc_codes: [SC0389]
+    supplier_pattern: "thera-trainer"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.88
+  - sc_codes: [SC0004]
+    supplier_pattern: "simulab"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "cook, inc"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0389]
+    supplier_pattern: "diagnosys"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0389]
+    supplier_pattern: "mobility research"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0004, SC0250, SC0341, SC0389]
+    supplier_pattern: "adex international"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.82
+  - sc_codes: [SC0389]
+    supplier_pattern: "daleco"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.82
+  - sc_codes: [SC0004, SC0175]
+    supplier_pattern: "patterson dental"
+    taxonomy_key: "Medical > Medical Equipment > Dental Equipment"
+    confidence: 0.9
+  - sc_codes: [SC0004]
+    supplier_pattern: "spectrum medical"
+    taxonomy_key: "Medical > Medical Equipment > Medical Facility Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0004]
+    supplier_pattern: "gcx"
+    taxonomy_key: "Medical > Medical Equipment > Medical Facility Equipment > Brackets"
+    confidence: 0.9
+  - sc_codes: [SC0341, SC0389]
+    supplier_pattern: "inbody"
+    taxonomy_key: "Medical > Medical Equipment > Patient Exam And Monitoring Equipment"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "jackson health"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "yale new haven"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "rhode island hospital"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "university medical center.*southern nevada"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "maryland proton"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "nationwide children"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "arkansas children"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "promedica russell|salt lake county|the safety place|phoenix children|salt river pima|long island jewish|pacific safety center|oregon health.*science|arkansas children|young men.*christian|st joseph.*hospital|wind river family"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "children.*hospital.*los angeles"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "eastern virginia medical"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "wayne metropolitan"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.82
+  - sc_codes: [SC0250]
+    supplier_pattern: "cincinnati works"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "restart your life"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "empowering young women"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "dent neurosciences"
+    taxonomy_key: "Medical > Medical Services > Clinical Consulting > Clinical Trials"
+    confidence: 0.85
+  - sc_codes: [SC0255]
+    supplier_pattern: "talbert house"
+    taxonomy_key: "Medical > Medical Services > Medical Specialist Services > Behavioral / Mental Health"
+    confidence: 0.88
+  - sc_codes: [SC0341]
+    supplier_pattern: "1n5"
+    taxonomy_key: "Medical > Medical Services > Medical Specialist Services > Behavioral / Mental Health"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "avondale respite"
+    taxonomy_key: "Medical > Medical Services > Nursing And Care Services > Respite"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "angel medflight"
+    taxonomy_key: "Medical > Medical Services > Transportation > Ambulance Services"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "imagine pharma"
+    taxonomy_key: "Medical > Pharmaceuticals"
+    confidence: 0.85
+
+  # --- Professional Services ---
+  - sc_codes: [SC0341]
+    supplier_pattern: "cincinnati usa regional chamber"
+    taxonomy_key: "Professional Services > Association & Membership fees"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "improvecarenow"
+    taxonomy_key: "Professional Services > Association & Membership fees"
+    confidence: 0.82
+  - sc_codes: [SC0004, SC0250, SC0389]
+    supplier_pattern: "kolar design"
+    taxonomy_key: "Professional Services > Consulting > Design and Architectural Services"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "design impact"
+    taxonomy_key: "Professional Services > Consulting > Design and Architectural Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "sevengen"
+    taxonomy_key: "Professional Services > Consulting > Enviromental Consulting"
+    confidence: 0.82
+  - sc_codes: [SC0250]
+    supplier_pattern: "national safety council"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "biometric information management"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.82
+  - sc_codes: [SC0250]
+    supplier_pattern: "cohear"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.8
+  - sc_codes: [SC0250, SC0562]
+    supplier_pattern: "live well collaborative"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "odacs"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "superlative group"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.8
+  - sc_codes: [SC0250]
+    supplier_pattern: "apollo kids mining"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "arnav biotech"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "lisa t baker"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "wynden stark"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "verge monarch"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "sst gou"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "barbara l. rose"
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "guidepoint security"
+    taxonomy_key: "Professional Services > Consulting > IT Consulting"
+    confidence: 0.88
+  - sc_codes: [SC0250]
+    supplier_pattern: "pomiet"
+    taxonomy_key: "Professional Services > Consulting > IT Consulting"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "healthcare data analytics"
+    taxonomy_key: "Professional Services > Consulting > IT Consulting"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "opdecision"
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "associates in process improv"
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.85
+  - sc_codes: [SC0250]
+    supplier_pattern: "wave strategy"
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.82
+  - sc_codes: [SC0250]
+    supplier_pattern: "optimum impact"
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.82
+  - sc_codes: [SC0250]
+    supplier_pattern: "braver management"
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.8
+  - sc_codes: [SC0271]
+    supplier_pattern: "equipe"
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "fairplex"
+    taxonomy_key: "Professional Services > Financial Services > Accounting Services > General Accounting Services"
+    confidence: 0.78
+  - sc_codes: [SC0250]
+    supplier_pattern: "state street bank"
+    taxonomy_key: "Professional Services > Financial Services > Banking and Investment"
+    confidence: 0.9
+  - sc_codes: [SC0271]
+    supplier_pattern: "standard.*poor"
+    taxonomy_key: "Professional Services > Financial Services > Banking and Investment"
+    confidence: 0.9
+  - sc_codes: [SC0271]
+    supplier_pattern: "bank of new york mellon"
+    taxonomy_key: "Professional Services > Financial Services > Banking and Investment"
+    confidence: 0.9
+  - sc_codes: [SC0250]
+    supplier_pattern: "hospital pricing specialists"
+    taxonomy_key: "Professional Services > Financial Services > Revenue Cycle"
+    confidence: 0.88
+  - sc_codes: [SC0271]
+    supplier_pattern: "exaltant"
+    taxonomy_key: "Professional Services > Financial Services > Revenue Cycle"
+    confidence: 0.82
+  - sc_codes: [SC0207, SC0250]
+    supplier_pattern: "salix"
+    taxonomy_key: "Professional Services > Financial Services > Revenue Cycle"
+    confidence: 0.8
+
+  # --- Travel ---
+  - sc_codes: [SC0250]
+    supplier_pattern: "college hill presbyterian"
+    taxonomy_key: "Travel > Venue Hire"
+    confidence: 0.78
+
+  # =========================================================================
+  # PHASE 6 TARGETED RULES (v6)
+  # ~20 supplier rules targeting high-volume QR suppliers with 20+ rows each.
+  # Fills SC code gaps where suppliers were already partially covered, plus
+  # new rules for suppliers not previously covered.
+  # =========================================================================
+
+  # --- Marketing: CCHMC Gift Shop (67 QR rows) ---
+  # Internal hospital gift shop — patient amenities, toys, comfort items.
+  - sc_codes: [SC0207, SC0341, SC0582]
+    supplier_pattern: "cchmc gift shop"
+    taxonomy_key: "Marketing > Merchandising > Promotional Items"
+    confidence: 0.80
+
+  # --- Medical: Standard Textile (65 QR rows) ---
+  # Healthcare linen/textile manufacturer. Existing rule covers SC0389 only.
+  - sc_codes: [SC0175, SC0004]
+    supplier_pattern: "standard textile"
+    taxonomy_key: "Medical > Medical Equipment > Medical Facility Equipment > Linens"
+    confidence: 0.88
+
+  # --- Facilities: InterMetro Industries (58 QR rows) ---
+  # Healthcare shelving/storage/cart manufacturer. Existing rule covers SC0389 only.
+  - sc_codes: [SC0004]
+    supplier_pattern: "intermetro"
+    taxonomy_key: "Facilities > Furniture"
+    confidence: 0.88
+
+  # --- Facilities: Cintas (52 QR rows) ---
+  # Uniform/facility services. Existing rule covers SC0175/SC0172 etc, missing SC0250.
+  - sc_codes: [SC0250]
+    supplier_pattern: "cintas"
+    taxonomy_key: "Facilities > Cleaning > Cleaning Services"
+    confidence: 0.82
+
+  # --- Medical: Plant Extracts International (51 QR rows) ---
+  # Essential oils and plant-based therapeutic products.
+  - sc_codes: [SC0175]
+    supplier_pattern: "plant extract"
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 0.80
+
+  # --- IT: Encore Technologies (48 QR rows) ---
+  # IT services/cloud/data center. Existing rules cover SC0250/SC0004 etc, missing SC0207/SC0551.
+  - sc_codes: [SC0207, SC0551]
+    supplier_pattern: "encore technologies"
+    taxonomy_key: "IT & Telecoms > IT Hardware"
+    confidence: 0.85
+
+  # --- Medical: P&G Oral Health (38 QR rows) ---
+  # Dental/oral care products for patient care.
+  - sc_codes: [SC0175]
+    supplier_pattern: "p&g oral|procter.*gamble.*oral|oral-b"
+    taxonomy_key: "Medical > Medical Consumables > Patient Care And Treatment Products"
+    confidence: 0.85
+
+  # --- Facilities: Alpine Valley Water (34 QR rows) ---
+  # Water delivery service. Existing rule covers SC0207 only, missing SC0250.
+  - sc_codes: [SC0250]
+    supplier_pattern: "alpine valley water"
+    taxonomy_key: "Facilities > Food & Beverage > Beverages > Water"
+    confidence: 0.82
+
+  # --- Facilities: Water-Tek Inc (34 QR rows) ---
+  # Water treatment and facility water products.
+  - sc_codes: [SC0207]
+    supplier_pattern: "water.tek"
+    taxonomy_key: "Facilities > Waste Management > Water Treatment"
+    confidence: 0.80
+
+  # --- Medical: Hilco Vision (32 QR rows) ---
+  # Vision care products and supplies.
+  - sc_codes: [SC0207]
+    supplier_pattern: "hilco vision"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.85
+
+  # --- Facilities: Veritiv Operating Company (32 QR rows) ---
+  # Paper, packaging, and facility supply distributor.
+  - sc_codes: [SC0175]
+    supplier_pattern: "veritiv"
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.82
+
+  # --- Medical: Pearson Clinical Assessments (31 QR rows) ---
+  # Clinical psychological and developmental assessment tools.
+  - sc_codes: [SC0207]
+    supplier_pattern: "pearson clinical"
+    taxonomy_key: "Medical > Learning Resources"
+    confidence: 0.85
+
+  # --- Facilities: Guy Brown (31 QR rows) ---
+  # Office supply distributor. Existing rule covers SC0175/SC0207 etc, missing SC0341/SC0193.
+  - sc_codes: [SC0341, SC0193]
+    supplier_pattern: "guy brown"
+    taxonomy_key: "Facilities > Office Equipment & Supplies > Office Supplies"
+    confidence: 0.82
+
+  # --- Medical: Pajunk Medical Systems (30 QR rows) ---
+  # Regional anesthesia needles and pain management medical devices.
+  - sc_codes: [SC0341]
+    supplier_pattern: "pajunk"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.88
+
+# ---------------------------------------------------------------------------
+# CONTEXT RULES
+# Applied when supplier rules don't match. Uses Line of Service as signal.
+# SC code + Line of Service combination → refined taxonomy.
+# line_of_service_pattern is matched case-insensitive against the LoS value.
+# ---------------------------------------------------------------------------
+context_rules:
+
+  # SC0175 Consumable Supplies in Research → Lab Supplies
+  - sc_codes: [SC0175, SC0172, SC0174, SC0207]
+    line_of_service_pattern: "LS01.*Research"
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.80
+
+  # SC0175 Consumable Supplies in Clinical → Medical Supplies
+  - sc_codes: [SC0175, SC0172, SC0174]
+    line_of_service_pattern: "LS06.*Clinical.*Hospital|LS03.*Clinical.*Professional"
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.75
+
+  # SC0004 Minor Equipment in Research → Lab Equipment
+  - sc_codes: [SC0004, SC0506, SC0193, SC0194]
+    line_of_service_pattern: "LS01.*Research"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.75
+
+  # SC0004 Minor Equipment in Clinical → Medical Equipment
+  - sc_codes: [SC0004, SC0506, SC0193, SC0194]
+    line_of_service_pattern: "LS06.*Clinical.*Hospital|LS03.*Clinical.*Professional"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.75
+
+  # SC0250 Contracted Services in Research → Medical Services (research)
+  - sc_codes: [SC0250, SC0271, SC0296, SC0374]
+    line_of_service_pattern: "LS01.*Research"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.70
+
+  # SC0250 Contracted Services in Clinical → Medical Services
+  - sc_codes: [SC0250, SC0271, SC0296]
+    line_of_service_pattern: "LS06.*Clinical.*Hospital|LS03.*Clinical.*Professional"
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.70
+
+  # SC0389 Capital Equipment in Research → Lab Equipment
+  - sc_codes: [SC0389]
+    line_of_service_pattern: "LS01.*Research"
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.75
+
+  # SC0389 Capital Equipment in Clinical → Medical Equipment
+  - sc_codes: [SC0389]
+    line_of_service_pattern: "LS06.*Clinical.*Hospital|LS03.*Clinical.*Professional"
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.75
+
+# ---------------------------------------------------------------------------
+# COST CENTER RULES
+# Applied when context (LoS) rules don't match. Uses Cost Center name as signal.
+# SC code + Cost Center keyword → refined taxonomy.
+# cost_center_pattern is matched case-insensitive against the Cost Center value.
+# ---------------------------------------------------------------------------
+cost_center_rules:
+
+  - sc_codes: [SC0389]
+    cost_center_pattern: 'Design.Construction|Space Mgmt|Facilities|Building Maint'
+    taxonomy_key: "Facilities > Construction Services"
+    confidence: 0.80
+
+  - sc_codes: [SC0389]
+    cost_center_pattern: 'Surgery|Cardiology|Neurology|Radiology|Anesthesia|NICU|Nursing|Operating Room'
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.78
+
+  - sc_codes: [SC0389]
+    cost_center_pattern: 'Research|Veterinary|Lab|Simulation'
+    taxonomy_key: "Medical > Laboratory > Laboratory Equipment"
+    confidence: 0.78
+
+  - sc_codes: [SC0004, SC0506]
+    cost_center_pattern: 'Clinical Engineering|Cardiology|NICU|Nursing|Surgery|Operating Room'
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.75
+
+  - sc_codes: [SC0004, SC0506]
+    cost_center_pattern: 'Is Client Services|Epic|ERP|Digital|Information Services'
+    taxonomy_key: "IT & Telecoms > IT Hardware > Laptop/Desktop"
+    confidence: 0.75
+
+  - sc_codes: [SC0250, SC0271]
+    cost_center_pattern: 'Building Maint|Environmental|Facilities|Housekeeping'
+    taxonomy_key: "Facilities > Cleaning > Cleaning Services"
+    confidence: 0.75
+
+  - sc_codes: [SC0207, SC0175, SC0172, SC0174]
+    cost_center_pattern: 'Research|Lab|Veterinary|Pathology'
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.75
+
+  # =========================================================================
+  # PHASE 6 COST CENTER RULES (v6)
+  # Selective rules where cost center name genuinely narrows classification.
+  # =========================================================================
+
+  # Environmental Services buying consumable/misc supplies = cleaning supplies
+  - sc_codes: [SC0175, SC0172, SC0341]
+    cost_center_pattern: 'Environmental Services|Housekeeping|Liberty Environmental'
+    taxonomy_key: "Facilities > Cleaning > Cleaning Supplies"
+    confidence: 0.78
+
+  # Design/Construction/Facilities buying minor equipment = facilities equipment
+  - sc_codes: [SC0004]
+    cost_center_pattern: 'Design.Construction|Space Mgmt|Facilities Management'
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment"
+    confidence: 0.78
+
+  # Facilities Management buying consumable supplies = maintenance supplies
+  - sc_codes: [SC0175]
+    cost_center_pattern: 'Facilities Management|Building Maint'
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance > Supplies"
+    confidence: 0.78
+
+# ---------------------------------------------------------------------------
+# SUPPLIER OVERRIDE RULES (Post-Classification)
+# Applied AFTER all classification tiers. Corrects non-ambiguous SC code
+# misclassifications where supplier identity clearly contradicts the L1
+# category assigned by the SC code's default mapping.
+#
+# override_from_l1: list of L1 categories that should be overridden.
+# Only fires when current L1 is in this list (surgical, not blanket).
+# ---------------------------------------------------------------------------
+supplier_override_rules:
+
+  # --- IT vendors classified under Facilities via non-ambiguous SC codes ---
+  - supplier_pattern: 'epic systems|epic hosted'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.92
+
+  - supplier_pattern: 'salesforce'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.92
+
+  - supplier_pattern: 'microsoft'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.92
+
+  - supplier_pattern: 'ukg|kronos'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.92
+
+  - supplier_pattern: 'servicenow'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.92
+
+  # --- Medical equipment vendors misclassified under Facilities/IT ---
+  - supplier_pattern: 'varian medical'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.90
+
+  - supplier_pattern: 'canon medical'
+    override_from_l1: ["Facilities", "IT & Telecoms"]
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.90
+
+  - supplier_pattern: 'brainlab'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.90
+
+  - supplier_pattern: 'merge healthcare|amicas'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.88
+
+  - supplier_pattern: 'siemens medical'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.90
+
+  # --- Medical OEMs: equipment repair/maintenance (SC0260/SC0261/SC0187) misclassified under Facilities ---
+  - supplier_pattern: 'philips|illumina|steris|baxter|ge healthcare|medtronic|stryker|getinge|becton|hologic|draeger'
+    override_from_l1: ["Facilities"]
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.88

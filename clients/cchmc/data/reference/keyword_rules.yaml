@@ -1,0 +1,709 @@
+rules:
+- pattern: fire alarm|fire protection|sprinkler|fire extinguisher|fire safety
+  category: Facilities > Facilities Services > Fire > Fire Safety Systems
+  confidence: 0.95
+- pattern: hvac|air condition|heating|cooling|chiller|boiler|furnace|thermostat
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation
+    & Maintenance
+  confidence: 0.95
+- pattern: bas system|building automation|ddc|direct digital control
+  category: Facilities > Technology Systems > Building Automation & Control Systems
+  confidence: 0.95
+- pattern: electrical service|electrical maintenance|wiring|circuit|breaker|panel
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+  confidence: 0.95
+- pattern: led bulb|light bulb|lamp|incandescent|fluorescent|lighting fixture|led.*lamp|satco|sylvania|philips.*light|flight
+    light
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Supplies
+  confidence: 0.9
+- pattern: led.*\d+w|\d+t\d+/led|bulb.*led|led.*bulb
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Supplies
+  confidence: 0.9
+- pattern: generator|backup power
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Generators
+  confidence: 0.95
+- pattern: plumbing|drain|faucet|toilet|sink|pipe fitting|valve
+  category: Facilities > Facilities Services > Building Maintenance > Plumbing Maintenance
+  confidence: 0.9
+- pattern: toilet auger|drain clean|plumb.*supply
+  category: Facilities > Facilities Services > Building Maintenance > Plumbing Maintenance
+    > Supplies
+  confidence: 0.9
+- pattern: landscap|grounds|lawn|garden|irrigation|sprinkler system
+  category: Facilities > Facilities Services > Building Maintenance > Landscaping
+    Services
+  confidence: 0.95
+- pattern: snow removal|snow plow|ice melt|salt.*road
+  category: Facilities > Facilities Services > Building Maintenance > Snow Removal
+  confidence: 0.95
+- pattern: paving|asphalt|concrete.*pour|excavat
+  category: Facilities > Facilities Services > Building Maintenance > Grounds Maintenance
+    > Excavating & Paving Services
+  confidence: 0.9
+- pattern: janitorial|cleaning service|custodial
+  category: Facilities > Cleaning > Cleaning Services > Janitorial Services
+  confidence: 0.95
+- pattern: cleaning.*supply|mop|broom|bucket|cleaning chemical|disinfectant|sanitizer
+  category: Facilities > Cleaning > Cleaning Supplies
+  confidence: 0.9
+- pattern: window clean
+  category: Facilities > Cleaning > Cleaning Services > Window Cleaning Services
+  confidence: 0.95
+- pattern: pressure wash
+  category: Facilities > Cleaning > Cleaning Services > Pressure Washing Services
+  confidence: 0.95
+- pattern: laundry|linen service
+  category: Facilities > Cleaning > Laundry Services > Linen Services
+  confidence: 0.95
+- pattern: elevator|lift.*maintenance|escalator
+  category: Facilities > Facilities Services > Building Maintenance > Elevator Maintenance
+  confidence: 0.95
+- pattern: door.*install|door.*repair|automatic door|door operator
+  category: Facilities > Facilities Services > Building Maintenance > Door Installation
+    & Maintenance
+  confidence: 0.9
+- pattern: pest control|exterminator|rodent|termite
+  category: Facilities > Facilities Services > Building Maintenance > Pest Control
+  confidence: 0.95
+- pattern: paint.*service|painting|wall coating
+  category: Facilities > Facilities Services > Building Maintenance > Painting Services
+  confidence: 0.9
+- pattern: roof.*repair|roof.*maintenance|roofing
+  category: Facilities > Facilities Services > Building Maintenance > Roof Maintenance
+  confidence: 0.9
+- pattern: floor.*install|flooring|carpet|tile.*floor|vinyl.*floor
+  category: Facilities > Facilities Services > Building Maintenance > Flooring Services
+  confidence: 0.9
+- pattern: security guard|security service|patrol
+  category: Facilities > Facilities Services > Security > Security Services > Security
+    Guards
+  confidence: 0.95
+- pattern: access control|badge|key card|credential
+  category: Facilities > Facilities Services > Security > Security Equipment > Access
+    Control
+  confidence: 0.9
+- pattern: alarm monitor|security alarm
+  category: Facilities > Facilities Services > Security > Security Equipment > Alarm
+    monitoring
+  confidence: 0.9
+- pattern: locksmith|lock.*service|rekey
+  category: Facilities > Facilities Services > Security > Security Services > Locksmith
+    Services
+  confidence: 0.95
+- pattern: safety goggle|eye protection|safety glass
+  category: Facilities > Facilities Services > Safety > PPE > Safety Goggles
+  confidence: 0.9
+- pattern: safety glove|work glove|protective glove
+  category: Facilities > Facilities Services > Safety > PPE > Gloves
+  confidence: 0.9
+- pattern: hard hat|safety helmet|bump cap
+  category: Facilities > Facilities Services > Safety > PPE
+  confidence: 0.9
+- pattern: coverall|tyvek|protective suit
+  category: Facilities > Facilities Services > Safety > PPE > Overalls
+  confidence: 0.9
+- pattern: safety shoe|steel toe|work boot
+  category: Facilities > Facilities Services > Safety > PPE > Safety Shoes
+  confidence: 0.9
+- pattern: ear plug|hearing protection|ear muff
+  category: Facilities > Facilities Services > Safety > PPE > Ear Plugs
+  confidence: 0.9
+- pattern: eye wash|eyewash station
+  category: Facilities > Facilities Services > Safety > Safety Services
+  confidence: 0.9
+- pattern: uniform|work shirt|work pant|corporate apparel
+  category: Facilities > Facilities Services > Safety > PPE > Uniforms
+  confidence: 0.85
+- pattern: screw|bolt|nut|washer|fastener|anchor
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts > Tools
+  confidence: 0.8
+- pattern: hand tool|wrench|screwdriver|plier|hammer|drill bit
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts > Tools
+  confidence: 0.85
+- pattern: tape measure|level|measuring
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts > Tools
+  confidence: 0.85
+- pattern: equipment rental|rental.*equipment|lift rental|scaffold rental
+  category: Facilities > Equipment & Machinery > Equipment > Equipment Rental
+  confidence: 0.9
+- pattern: furniture|desk|chair|table|cabinet|shelving|bookcase
+  category: Facilities > Furniture
+  confidence: 0.85
+- pattern: office chair|task chair|ergonomic chair
+  category: Facilities > Furniture > Chair
+  confidence: 0.9
+- pattern: office desk|workstation
+  category: Facilities > Furniture > Desk
+  confidence: 0.9
+- pattern: coffee|tea.*beverage|water.*cooler|vending
+  category: Facilities > Food & Beverage > Beverages > Coffee
+  confidence: 0.85
+- pattern: catering|food service
+  category: Facilities > Facilities Services > Catering > Catering Services
+  confidence: 0.9
+- pattern: waste disposal|trash|refuse|garbage|dumpster
+  category: Facilities > Waste Management > Refuse Disposal
+  confidence: 0.9
+- pattern: hazardous waste|biohazard|medical waste
+  category: Facilities > Waste Management > Refuse Disposal > Hazardous Refuse Disposal
+  confidence: 0.95
+- pattern: water treatment|water filter|filtration
+  category: Facilities > Waste Management > Water Treatment
+  confidence: 0.85
+- pattern: laptop|desktop|computer|workstation.*pc
+  category: IT & Telecoms > IT Hardware > Laptop/Desktop
+  confidence: 0.9
+- pattern: monitor|display.*screen
+  category: IT & Telecoms > IT Hardware > Computer Peripherals > Monitor
+  confidence: 0.9
+- pattern: keyboard
+  category: IT & Telecoms > IT Hardware > Computer Peripherals > Keyboard
+  confidence: 0.9
+- pattern: mouse|trackpad
+  category: IT & Telecoms > IT Hardware > Computer Peripherals > Mouse
+  confidence: 0.9
+- pattern: printer|copier|scanner|multifunction
+  category: IT & Telecoms > IT Hardware > Printer, Copier, Scanner
+  confidence: 0.9
+- pattern: tablet.*computer|ipad|handheld.*device|handheld.*computer
+  category: IT & Telecoms > IT Hardware > Handheld/Tablet
+  confidence: 0.9
+- pattern: software license|software subscription|saas|application software
+  category: IT & Telecoms > Software > Application Software
+  confidence: 0.85
+- pattern: network.*cable|ethernet|fiber optic|cat5|cat6
+  category: IT & Telecoms > IT Hardware > Wires & Cables
+  confidence: 0.9
+- pattern: telephone|phone service|telecom|pbx|voip
+  category: IT & Telecoms > Telecoms > Telecom Services > Telephony Service
+  confidence: 0.85
+- pattern: pager|beeper
+  category: IT & Telecoms > Telecoms > Telecom Hardware > Pagers
+  confidence: 0.9
+- pattern: surgical|surgery|operating room|sterile
+  category: Medical > Medical Equipment > Surgical Equipment
+  confidence: 0.85
+- pattern: laboratory|lab supply|specimen|test tube|petri
+  category: Medical > Laboratory > Laboratory Supplies
+  confidence: 0.85
+- pattern: lab equipment|centrifuge|microscope
+  category: Medical > Laboratory > Laboratory Equipment
+  confidence: 0.9
+- pattern: radiology|x-ray|imaging|mri|ct scan
+  category: Medical > Laboratory > Radiology
+  confidence: 0.9
+- pattern: syringe|needle|iv.*supply|intravenous
+  category: Medical > Medical Consumables > Intravenous And Arterial Products
+  confidence: 0.9
+- pattern: catheter
+  category: Medical > Medical Equipment > Catheter
+  confidence: 0.95
+- pattern: dialysis
+  category: Medical > Medical Equipment > Dialysis Equipment
+  confidence: 0.95
+- pattern: defibrillator|aed
+  category: Medical > Medical Equipment > Emergency And Field Medical Equipment >
+    Defibrillators
+  confidence: 0.95
+- pattern: ecg|ekg|electrocardiogram
+  category: Medical > Medical Consumables > Medical Diagnostic Imaging & Nuclear Med.
+    > ECG Supplies
+  confidence: 0.9
+- pattern: patient monitor|vital sign
+  category: Medical > Medical Equipment > Patient Exam And Monitoring Equipment >
+    Monitoring Equipment
+  confidence: 0.9
+- pattern: medical gas|oxygen.*tank|o2.*supply
+  category: Medical > Medical Consumables > Medical Gas > O2
+  confidence: 0.9
+- pattern: pharmaceutical|drug|medication|pharmacy
+  category: Medical > Pharmaceuticals > Drugs
+  confidence: 0.85
+- pattern: hand sanitizer
+  category: Medical > Medical Consumables > Patient Care And Treatment Products >
+    External Application > Hand Sanitizer
+  confidence: 0.95
+- pattern: medical equipment.*repair|biomed|biomedical
+  category: Medical > Medical Equipment > Medical Equipment Maintenance & Repair
+  confidence: 0.9
+- pattern: steriliz|autoclave
+  category: Medical > Medical Services > Medical Sterilisation Services
+  confidence: 0.9
+- pattern: ambulance
+  category: Medical > Medical Services > Transportation > Ambulance Services
+  confidence: 0.95
+- pattern: legal service|attorney|lawyer|law firm
+  category: Professional Services > Legal > Legal Services
+  confidence: 0.95
+- pattern: accounting|audit|cpa|bookkeep
+  category: Professional Services > Financial Services > Accounting Services > General
+    Accounting Services
+  confidence: 0.9
+- pattern: consulting|consultant|advisory
+  category: Professional Services > Consulting > General Consulting Services
+  confidence: 0.8
+- pattern: architect|design service
+  category: Professional Services > Consulting > Design and Architectural Services
+  confidence: 0.85
+- pattern: engineering.*consult|engineer.*service
+  category: Professional Services > Consulting > Engineering Consulting
+  confidence: 0.85
+- pattern: insurance.*premium|insurance.*policy
+  category: Professional Services > Insurance > Business Insurance
+  confidence: 0.85
+- pattern: interpreter|translation|language service
+  category: Professional Services > Language Services > Interpreting Services
+  confidence: 0.9
+- pattern: background check|screening
+  category: Human Resources > Resourcing > Recruitment > Background Checks
+  confidence: 0.9
+- pattern: recruitment|staffing|temp.*agency
+  category: Human Resources > Resourcing > Recruitment > Temporary Staff
+  confidence: 0.85
+- pattern: courier|fedex|ups|dhl|shipping
+  category: Logistics > Courier Services
+  confidence: 0.9
+- pattern: postage|stamp|mail.*service|usps
+  category: Logistics > Courier Services > Postage Services
+  confidence: 0.9
+- pattern: freight|trucking|cargo
+  category: Logistics > Freight Services
+  confidence: 0.9
+- pattern: hotel|lodging|accommodation
+  category: Travel > Accommodation > Hotels
+  confidence: 0.9
+- pattern: airfare|airline ticket|air travel|plane ticket
+  category: Travel > Transportation > Flight
+  confidence: 0.95
+- pattern: rental car|car rental|vehicle rental
+  category: Travel > Transportation > Rental Car
+  confidence: 0.95
+- pattern: parking lot|parking garage|parking fee|parking service
+  category: Travel > Parking
+  confidence: 0.9
+- pattern: taxi|uber|lyft|rideshare
+  category: Travel > Transportation > Taxis
+  confidence: 0.9
+- pattern: advertising|marketing|promotion
+  category: Marketing > Advertising
+  confidence: 0.8
+- pattern: print.*service|printing|copying
+  category: Marketing > Print > Print Services > Printing & Copying Services
+  confidence: 0.85
+- pattern: signage|sign.*install|banner
+  category: Marketing > Signage
+  confidence: 0.85
+- pattern: event.*management|conference|seminar
+  category: Marketing > Events > Events Management
+  confidence: 0.85
+- pattern: photography|photographer
+  category: Marketing > Filming & Photography
+  confidence: 0.9
+- pattern: training|education|course|workshop
+  category: Human Resources > Learning & Development > Training
+  confidence: 0.85
+- pattern: employee recognition|award|appreciation
+  category: Human Resources > Employee Benefits > Employee Recognition
+  confidence: 0.9
+- pattern: donation|charitable|philanthrop
+  category: Finance > Donations
+  confidence: 0.9
+- pattern: license.*fee|permit.*fee|government fee
+  category: Finance > Fees > Licenses & Permits
+  confidence: 0.85
+- pattern: maintenance.*service|repair.*service|service.*agreement
+  category: Facilities > Equipment & Machinery > Service & Maintenance
+  confidence: 0.75
+- pattern: office supply|stapler|paper clip|pen|pencil|notepad
+  category: Facilities > Office Equipment & Supplies > Office Supplies
+  confidence: 0.8
+- pattern: stationery|envelope|letterhead
+  category: Facilities > Office Equipment & Supplies > Stationery
+  confidence: 0.8
+- pattern: coupling|coupler|fitting|connector|adapter|gasket|seal|o-ring
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: filter|filter sleeve|air filter|oil filter
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: pump|motor|compressor|blower|fan
+  category: Facilities > Equipment & Machinery > Equipment
+  confidence: 0.8
+- pattern: hose|tubing|pipe|duct|conduit
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: battery|batteries|cell.*battery
+  category: IT & Telecoms > IT Hardware > Batteries
+  confidence: 0.8
+- pattern: flashlight|headlamp|work light|penlight
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts > Tools
+  confidence: 0.8
+- pattern: caster|wheel|roller
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: cart|dolly|hand truck
+  category: Facilities > Facilities Services > Material Handling > Material Handling
+    Equipment
+  confidence: 0.85
+- pattern: ladder|step stool|scaffold
+  category: Facilities > Equipment & Machinery > Equipment
+  confidence: 0.85
+- pattern: tape|adhesive tape|duct tape|electrical tape
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: lubricant|grease|oil|wd-40
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: rope|chain|cable|wire
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: clamp|bracket|mount|hanger
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: towel|cloth|rag|wipe
+  category: Facilities > Cleaning > Cleaning Supplies
+  confidence: 0.75
+- pattern: can|container|bin|pail|bucket
+  category: Facilities > Cleaning > Cleaning Supplies > Bins
+  confidence: 0.75
+- pattern: linen|bedding|sheet|pillow|blanket.*bed|mattress
+  category: Medical > Medical Equipment > Medical Facility Equipment > Linens
+  confidence: 0.85
+- pattern: patient.*care|medical supply|clinical supply
+  category: Medical > Medical Consumables > Medical Supplies
+  confidence: 0.8
+- pattern: shower|shower head|bath
+  category: Facilities > Facilities Services > Building Maintenance > Plumbing Maintenance
+    > Supplies
+  confidence: 0.8
+- pattern: ballcock|flushometer|flush valve|tank.*valve
+  category: Facilities > Facilities Services > Building Maintenance > Plumbing Maintenance
+    > Supplies
+  confidence: 0.85
+- pattern: GRAINGER.*Jacket|Coverall|Garment
+  category: Facilities > Facilities Services > Safety > PPE > Overalls
+  confidence: 0.85
+- pattern: GRAINGER.*Glove|GRAINGER.*Winter Glove
+  category: Facilities > Facilities Services > Safety > PPE > Gloves
+  confidence: 0.85
+- pattern: GRAINGER.*Hook|GRAINGER.*Anchor
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts > Tools
+  confidence: 0.8
+- pattern: FY\d{2}.*Blanket PO|Blanket PO.*FY\d{2}
+  category: Facilities > Equipment & Machinery > Service & Maintenance
+  confidence: 0.7
+- pattern: pool.*sanitizer|pool.*chemical|chlorine|brominating
+  category: Facilities > Facilities Services > Building Maintenance > Environmental
+    Services > Water Treatment Services
+  confidence: 0.85
+- pattern: diesel|gasoline|fuel can|fuel tank
+  category: Facilities > Utilities > Fuel
+  confidence: 0.85
+- pattern: fire cabinet|fire extinguisher cabinet
+  category: Facilities > Facilities Services > Fire > Fire Equipment > Fire Extinguishers
+  confidence: 0.9
+- pattern: garden hose|water hose|hose nozzle
+  category: Facilities > Facilities Services > Building Maintenance > Grounds Maintenance
+    > Supplies
+  confidence: 0.85
+- pattern: scale inhibitor|descaler|lime remover
+  category: Facilities > Facilities Services > Building Maintenance > Plumbing Maintenance
+    > Supplies
+  confidence: 0.85
+- pattern: belt|v-belt|drive belt|conveyor belt
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: blade|saw blade|cutting blade|knife blade
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts > Tools
+  confidence: 0.8
+- pattern: cord|extension cord|power cord|electrical cord
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Supplies
+  confidence: 0.8
+- pattern: handle|replacement handle|tool handle
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: rubber|rubber sheet|rubber gasket|rubber seal
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: plastic.*part|plastic.*component|pvc.*fitting
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: impact.*driver|impact.*wrench|impact.*socket
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts > Tools
+  confidence: 0.85
+- pattern: shank|drill shank|bit shank
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts > Tools
+  confidence: 0.8
+- pattern: install.*service|installation
+  category: Facilities > Equipment & Machinery > Service & Maintenance
+  confidence: 0.75
+- pattern: repair.*part|replacement.*part|spare.*part
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: construction.*supply|building.*supply|contractor.*supply
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: adhesive|glue|epoxy|sealant
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: switch|toggle switch|limit switch|pressure switch
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Supplies
+  confidence: 0.8
+- pattern: thermocouple|sensor|probe|detector
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: bearing|ball bearing|roller bearing|bushing
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.85
+- pattern: spring|compression spring|tension spring
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: key|keystock|keyway|machine key
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: shaft|drive shaft|spindle
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: gear|gearbox|sprocket|pulley
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.85
+- pattern: fuse|circuit breaker|relay|contactor
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Supplies
+  confidence: 0.85
+- pattern: wire.*nut|wire.*connector|terminal|crimp
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Supplies
+  confidence: 0.8
+- pattern: strap|tie.*strap|ratchet.*strap|cargo.*strap
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: hook|s-hook|j-hook|grab.*hook
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: nozzle|spray.*nozzle|hose.*nozzle
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.75
+- pattern: regulator|pressure.*regulator|flow.*regulator
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: gauge|pressure.*gauge|temperature.*gauge
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.8
+- pattern: meter|flow.*meter|test.*meter|multimeter
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts > Tools
+  confidence: 0.8
+- pattern: FD LAWRENCE ELECTRIC
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Supplies
+  confidence: 0.9
+- pattern: SHERWIN.WILLIAMS
+  category: Facilities > Facilities Services > Building Maintenance > Painting Services
+    > Supplies
+  confidence: 0.9
+- pattern: KETCHUM.*WALTON
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation
+    & Maintenance
+  confidence: 0.88
+- pattern: AIRGAS
+  category: Medical > Medical Consumables > Medical Gas
+  confidence: 0.88
+- pattern: WEAS ENGINEERING
+  category: Professional Services > Engineering Services
+  confidence: 0.9
+- pattern: KFI ENGINEER
+  category: Professional Services > Engineering Services
+  confidence: 0.9
+- pattern: NELSON STARK
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation
+    & Maintenance
+  confidence: 0.85
+- pattern: COMMERCIAL PARTS.*SERVICE
+  category: Facilities > Equipment & Machinery > Service & Maintenance
+  confidence: 0.85
+- pattern: MODERN ENTRANCE
+  category: Facilities > Facilities Services > Building Maintenance > Door Installation
+    & Maintenance
+  confidence: 0.9
+- pattern: WINSTEL CONTROLS
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation
+    & Maintenance
+  confidence: 0.85
+- pattern: EQUIPPARTS
+  category: Facilities > Facilities Services > Building Maintenance > Plumbing Maintenance
+    > Supplies
+  confidence: 0.88
+- pattern: SECURETECH
+  category: Facilities > Facilities Services > Security > Security Services > Locksmith
+    Services
+  confidence: 0.9
+- pattern: MOBILCOMM
+  category: IT & Telecoms > Telecoms > Telecom Hardware
+  confidence: 0.85
+- pattern: PDI COMMUNICATION
+  category: IT & Telecoms > Telecoms > Telecom Hardware
+  confidence: 0.85
+- pattern: EMCOR SERVICE
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation
+    & Maintenance
+  confidence: 0.85
+- pattern: OAKLEY PAINT
+  category: Facilities > Facilities Services > Building Maintenance > Painting Services
+    > Supplies
+  confidence: 0.88
+- pattern: INTERIOR SUPPLY
+  category: Facilities > Construction Services
+  confidence: 0.85
+- pattern: GORDIAN
+  category: Facilities > Construction Services
+  confidence: 0.85
+- pattern: MESSER
+  category: Facilities > Construction Services
+  confidence: 0.85
+- pattern: CASSADY
+  category: Facilities > Construction Services
+  confidence: 0.85
+- pattern: DIVERZIFY
+  category: Facilities > Facilities Services > Building Maintenance > Flooring Services
+  confidence: 0.88
+- pattern: FLOOR SOURCE
+  category: Facilities > Facilities Services > Building Maintenance > Flooring Services
+  confidence: 0.88
+- pattern: HANDY WINDOW|WINDOW SHADE
+  category: Facilities > Furniture
+  confidence: 0.85
+- pattern: GALLS
+  category: Facilities > Facilities Services > Security > Security Equipment
+  confidence: 0.85
+- pattern: DOPPES.*LUMBER|JB DOPPES
+  category: Facilities > Construction Services
+  confidence: 0.85
+- pattern: SIERRA ENVIRONMENTAL
+  category: Facilities > Waste Management > Refuse Disposal > Hazardous Refuse Disposal
+  confidence: 0.88
+- pattern: COMPLIANT HEALTHCARE
+  category: Facilities > Equipment & Machinery > Service & Maintenance
+  confidence: 0.85
+- pattern: KRAMER.*FELDMAN
+  category: Facilities > Construction Services
+  confidence: 0.85
+- pattern: AMERIDIAN
+  category: Facilities > Equipment & Machinery > Service & Maintenance
+  confidence: 0.8
+- pattern: \d+X\d+X\d+.*PLEAT|MERV|HEPA.*FILTER|HI-FLO|DUAL-9
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation
+    & Maintenance
+  confidence: 0.88
+- pattern: refrigerant|R410A|R134A|R-410|R-134
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation
+    & Maintenance
+  confidence: 0.9
+- pattern: damper|actuator.*damper|damper.*actuator
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation
+    & Maintenance
+  confidence: 0.85
+- pattern: ballast|CRLEDFA|recessed.*downlight|led.*retrofit
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Supplies
+  confidence: 0.88
+- pattern: bush.*nipple|conduit.*body|conduit.*fitting|nipple.*galv
+  category: Facilities > Facilities Services > Building Maintenance > Electrical Services
+    > Supplies
+  confidence: 0.85
+- pattern: radio repair|two.way radio|radio.*service
+  category: IT & Telecoms > Telecoms > Telecom Hardware
+  confidence: 0.85
+- pattern: ceiling tile|ceiling grid|dune.*sq|armstrong.*tile
+  category: Facilities > Construction Services
+  confidence: 0.85
+- pattern: concrete work|concrete.*pour|concrete.*repair
+  category: Facilities > Construction Services
+  confidence: 0.85
+- pattern: asbestos|abatement
+  category: Facilities > Waste Management > Refuse Disposal > Hazardous Refuse Disposal
+  confidence: 0.9
+- pattern: nurse call|room control board|call system
+  category: Medical > Medical Equipment > Medical Facility Equipment
+  confidence: 0.85
+- pattern: valet|parking.*service|parking.*management
+  category: Travel > Valet Services
+  confidence: 0.9
+- pattern: auto.*door|automatic.*entrance|entrance.*system|door.*operator
+  category: Facilities > Facilities Services > Building Maintenance > Door Installation
+    & Maintenance
+  confidence: 0.88
+- pattern: door.*hinge|door.*closer|lockset|mortise.*lock|panic.*hardware|exit.*device
+  category: Facilities > Facilities Services > Building Maintenance > Door Installation
+    & Maintenance > Supplies
+  confidence: 0.85
+- pattern: blind|window.*shade|window.*treatment|venetian|roller.*shade
+  category: Facilities > Furniture
+  confidence: 0.8
+- pattern: steam.*line|steam.*repair|boiler.*repair|steam.*valve
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation
+    & Maintenance
+  confidence: 0.88
+- pattern: demo.*floor|replace.*floor|lvt|vct|epoxy.*floor
+  category: Facilities > Facilities Services > Building Maintenance > Flooring Services
+  confidence: 0.85
+- pattern: engineer|engineering
+  category: Professional Services > Consulting > Engineering Consulting
+  confidence: 0.95
+- pattern: construction|contracting|builder|renovation
+  category: Facilities > Construction Services
+  confidence: 0.95
+- pattern: degreaser|solvent|cleaner|detergent|simple green|goof off
+  category: Facilities > Cleaning > Cleaning Supplies > Chemicals
+  confidence: 0.95
+- pattern: houston brothers|waterproof|restoration
+  category: Facilities > Construction Services
+  confidence: 0.95
+- pattern: atg|compliance|regulatory
+  category: Professional Services > Consulting > General Consulting Services
+  confidence: 0.95
+
+# === ROUND 2 FIXES (post-verification audit) ===
+- pattern: CARRIER CORPORATION|CARRIER CORP
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation & Maintenance
+  confidence: 0.88
+- pattern: SURE MECHANICAL
+  category: Facilities > Facilities Services > Building Maintenance > HVAC Installation & Maintenance
+  confidence: 0.85
+- pattern: CHEM AQUA
+  category: Facilities > Waste Management > Water Treatment
+  confidence: 0.88
+- pattern: SUMMIT FIRE
+  category: Facilities > Facilities Services > Fire > Fire Safety Systems
+  confidence: 0.90
+- pattern: ACME LOCK
+  category: Facilities > Facilities Services > Security > Security Services > Locksmith Services
+  confidence: 0.90
+- pattern: ACCRUENT
+  category: IT & Telecoms > Software > Application Software
+  confidence: 0.85
+- pattern: BULWARK
+  category: Facilities > Facilities Services > Security > Security Equipment > Access Control
+  confidence: 0.85
+- pattern: WC STOREY|STOREY.*SON
+  category: Facilities > Equipment & Machinery > Service & Maintenance
+  confidence: 0.85
+- pattern: PARKMED
+  category: Travel > Valet Services
+  confidence: 0.90
+- pattern: REMEDI8
+  category: Facilities > Waste Management > Refuse Disposal > Hazardous Refuse Disposal
+  confidence: 0.85
+- pattern: MAIN LINE SUPPLY
+  category: Facilities > Equipment & Machinery > Consumable & Spare Parts
+  confidence: 0.85
+- pattern: CURBELL
+  category: Medical > Medical Equipment > Medical Facility Equipment
+  confidence: 0.85
+- pattern: HILL.ROM
+  category: Medical > Medical Equipment > Medical Facility Equipment
+  confidence: 0.88

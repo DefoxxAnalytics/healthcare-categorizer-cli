@@ -1,0 +1,55 @@
+client:
+  name: "UCH"
+  description: "University of Cincinnati Health — Oracle Fusion AP/Procurement"
+
+paths:
+  input: "data/input/uch-2026.xlsx"
+  category_mapping: "data/reference/uch_category_mapping.yaml"
+  taxonomy: "../../shared/reference/Healthcare Taxonomy v2.9.xlsx"
+  keyword_rules: "data/reference/keyword_rules.yaml"
+  refinement_rules: "data/reference/uch_refinement_rules.yaml"
+  output_dir: "output"
+  output_prefix: "uch_categorization_results"
+
+input_format:
+  sheet_name: "Org Data Pull"
+
+columns:
+  category_source: "Category Name"
+  supplier: "Supplier"
+  description: "Item Description"
+  cost_center: "Cost Center Description"
+  amount: "Paid Amount"
+  passthrough:
+    - "Agreement Type"
+    - "Order"
+    - "UNSPSC Category Name"
+    - "UNSPSC Category Description"
+    - "Requisition"
+    - "Creation Date"
+    - "Purchase Order Amount"
+    - "Item Name"
+    - "Line"
+    - "Line Status"
+    - "UOM"
+    - "Ordered Quantity"
+    - "Price"
+    - "PO Line Amount"
+    - "Manufacturer"
+    - "Supplier Number"
+    - "Cost Center Code"
+    - "Location Code"
+    - "Location Address"
+
+classification:
+  category_code_pattern: '^(\d+)-'
+  confidence_high: 0.7
+  confidence_medium: 0.5
+
+aggregations:
+  - name: "Spend by Cost Center"
+    column: "Cost Center Description"
+    top_n: null
+  - name: "Spend by Category (Top 30)"
+    column: "Category Name"
+    top_n: 30

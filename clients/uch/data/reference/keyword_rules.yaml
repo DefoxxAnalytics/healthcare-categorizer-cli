@@ -1,0 +1,13 @@
+rules:
+  - pattern: "suture|stitch|vicryl|prolene"
+    category: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.80
+  - pattern: "glove|nitrile|latex"
+    category: "Facilities > Facilities Services > Safety > PPE > Gloves"
+    confidence: 0.75
+  - pattern: "toner|cartridge|ink jet"
+    category: "IT & Telecoms > IT Hardware > Printer, Copier, Scanner"
+    confidence: 0.80
+  - pattern: "sanitizer|hand sanitiz"
+    category: "Medical > Medical Consumables > Patient Care And Treatment Products > External Application > Hand Sanitizer"
+    confidence: 0.75

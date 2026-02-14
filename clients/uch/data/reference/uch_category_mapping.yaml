@@ -1,0 +1,31 @@
+mappings:
+  "39101612":
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    ambiguous: true
+  "99000038":
+    taxonomy_key: "Facilities > Equipment & Machinery > Service & Maintenance"
+    ambiguous: false
+  "46182402":
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    ambiguous: false
+  "31160000":
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    ambiguous: false
+  "99000059":
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance"
+    ambiguous: false
+  "27110000":
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    ambiguous: false
+  "42271701":
+    taxonomy_key: "Medical > Medical Consumables > Medical Gas"
+    ambiguous: false
+  "26110000":
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    ambiguous: false
+  "53102710":
+    taxonomy_key: "Facilities > Facilities Services > Safety > PPE > Uniforms"
+    ambiguous: false
+  "99000051":
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance"
+    ambiguous: false

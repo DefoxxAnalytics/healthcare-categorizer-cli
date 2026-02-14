@@ -1,0 +1,1463 @@
+# SC Code -> Healthcare Taxonomy v2.9 Mapping
+# Client: Cincinnati Children's Hospital Medical Center (CCHMC)
+# Generated: 2026-02-13
+# 326 Workday Spend Category codes mapped to taxonomy keys
+#
+# confidence:
+#   1.0  = exact semantic match
+#   0.95 = strong match, minor ambiguity
+#   0.90 = good match, context-dependent
+#   0.85 = reasonable match, some generalization
+#   0.80 = best-available match, needs review
+#
+# Codes marked "AMBIGUOUS" fall back to embedding-based classification
+
+mappings:
+
+  # =========================================================================
+  # PHARMACEUTICALS & DRUGS
+  # =========================================================================
+  SC0219:
+    name: Drugs
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 1.0
+  SC0233:
+    name: Vaccines
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 0.95
+  SC0222:
+    name: Factors 8 & 9
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 0.95
+  SC0229:
+    name: Growth Hormone
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 0.95
+  SC0231:
+    name: Monoglobin Antibodies
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 0.95
+  SC0230:
+    name: Enzymes
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 0.95
+  SC0236:
+    name: Spinraza
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 1.0
+  SC0237:
+    name: Kymriah
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 1.0
+  SC0226:
+    name: Synagis
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 1.0
+  SC0242:
+    name: Zolgensma
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 1.0
+  SC0238:
+    name: Luxturna
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 1.0
+  SC0414:
+    name: Elevidys
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 1.0
+  SC0607:
+    name: Casgevy
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 1.0
+  SC0146:
+    name: Radio Pharmaceutical
+    taxonomy_key: "Medical > Pharmaceuticals > Radiocontrast Agent"
+    confidence: 0.95
+  SC0235:
+    name: Drug Repackaging Fee
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 0.90
+  SC0148:
+    name: Enteral Formula
+    taxonomy_key: "Medical > Pharmaceuticals > Drugs"
+    confidence: 0.90
+
+  # =========================================================================
+  # BLOOD & TRANSFUSION
+  # =========================================================================
+  SC0170:
+    name: Blood
+    taxonomy_key: "Medical > Medical Services > Blood Bank And Related Services"
+    confidence: 1.0
+
+  # =========================================================================
+  # CLINICAL / MEDICAL SUPPLIES
+  # =========================================================================
+  SC0133:
+    name: Clinical Supplies
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 1.0
+  SC0117:
+    name: Surgical Supplies
+    taxonomy_key: "Medical > Medical Equipment > Surgical Equipment"
+    confidence: 0.95
+  SC0118:
+    name: Sutures
+    taxonomy_key: "Medical > Medical Equipment > Surgical Equipment"
+    confidence: 0.95
+  SC0132:
+    name: Bits, Burs and Blades
+    taxonomy_key: "Medical > Medical Equipment > Surgical Equipment"
+    confidence: 0.95
+  SC0139:
+    name: Instruments
+    taxonomy_key: "Medical > Medical Equipment > Surgical Equipment"
+    confidence: 0.95
+  SC0140:
+    name: Instrument Replacement
+    taxonomy_key: "Medical > Medical Equipment > Surgical Equipment"
+    confidence: 0.95
+  SC0141:
+    name: Special Procedure Supplies
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.90
+  SC0153:
+    name: Patient Care & Treatment Supp
+    taxonomy_key: "Medical > Medical Consumables > Patient Care And Treatment Products"
+    confidence: 0.95
+  SC0154:
+    name: Patient Exam & Monitoring Supp
+    taxonomy_key: "Medical > Medical Equipment > Patient Exam And Monitoring Equipment"
+    confidence: 0.95
+  SC0158:
+    name: Cardiac/Thoracic Supplies
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.90
+  SC0155:
+    name: ENT Trachs
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.90
+  SC0134:
+    name: Thermometers/Trays/Syringes
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.95
+  SC0164:
+    name: Flu Preparedness Supplies
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.90
+  SC0150:
+    name: IV & Arterial Admin Supplies
+    taxonomy_key: "Medical > Medical Consumables > Intravenous And Arterial Products"
+    confidence: 1.0
+  SC0151:
+    name: Imaging & Nuclear Med Supplies
+    taxonomy_key: "Medical > Medical Consumables > Medical Diagnostic Imaging & Nuclear Med."
+    confidence: 1.0
+  SC0142:
+    name: Immunology Supplies
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.90
+  SC0152:
+    name: Medical Sterilization Supplies
+    taxonomy_key: "Medical > Medical Services > Medical Sterilisation Services"
+    confidence: 0.95
+  SC0213:
+    name: Disposables
+    taxonomy_key: "Medical > Medical Consumables > Medical Supplies"
+    confidence: 0.90
+
+  # =========================================================================
+  # IMPLANTS & PROSTHETICS
+  # =========================================================================
+  SC0120:
+    name: Implants
+    taxonomy_key: "Medical > Prosthetics"
+    confidence: 0.95
+  SC0121:
+    name: Implants Cardiac/Thorasic
+    taxonomy_key: "Medical > Prosthetics"
+    confidence: 0.95
+  SC0131:
+    name: Implants Bone & Tissue
+    taxonomy_key: "Medical > Prosthetics"
+    confidence: 0.95
+  SC0119:
+    name: Implants Miscellaneous
+    taxonomy_key: "Medical > Prosthetics"
+    confidence: 0.90
+
+  # =========================================================================
+  # MEDICAL EQUIPMENT & REHAB
+  # =========================================================================
+  SC0166:
+    name: Custom Power/Manual Wheelchair
+    taxonomy_key: "Medical > Prosthetics"
+    confidence: 0.95
+  SC0168:
+    name: General Rehab Equipment
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.90
+  SC0167:
+    name: Rehab Parts and Repairs
+    taxonomy_key: "Medical > Medical Equipment > Medical Equipment Maintenance & Repair"
+    confidence: 0.90
+  SC0165:
+    name: Rental Wheelchairs
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.90
+  SC0253:
+    name: Hanger Bracing PS
+    taxonomy_key: "Medical > Prosthetics"
+    confidence: 0.90
+  SC0138:
+    name: Medical Gases
+    taxonomy_key: "Medical > Medical Consumables > Medical Gas"
+    confidence: 1.0
+  SC0209:
+    name: Linens
+    taxonomy_key: "Medical > Medical Equipment > Medical Facility Equipment > Linens"
+    confidence: 1.0
+  SC0281:
+    name: Patient Care
+    taxonomy_key: "Medical > Medical Consumables > Patient Care And Treatment Products"
+    confidence: 0.90
+  SC0608:
+    name: Radiology Equip Service Repair
+    taxonomy_key: "Medical > Medical Equipment > Medical Equipment Maintenance & Repair"
+    confidence: 0.95
+
+  # =========================================================================
+  # LABORATORY & RESEARCH
+  # =========================================================================
+  SC0137:
+    name: Laboratory Supplies
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 1.0
+  SC0624:
+    name: Chemical & Test Kits
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.95
+  SC0192:
+    name: Research & Developmnt Supplies
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.90
+  SC0295:
+    name: Clinical Lab Service
+    taxonomy_key: "Medical > Laboratory > Laboratory Services"
+    confidence: 1.0
+  SC0144:
+    name: Media Supplies
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.85
+  SC0206:
+    name: Animal Purchase
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.85
+  SC0204:
+    name: Feed & Bedding
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.85
+  SC0205:
+    name: Caging Supplies
+    taxonomy_key: "Medical > Laboratory > Laboratory Supplies"
+    confidence: 0.85
+
+  # =========================================================================
+  # MEDICAL SERVICES
+  # =========================================================================
+  SC0285:
+    name: PS Ground Ambulance
+    taxonomy_key: "Medical > Medical Services > Transportation > Ambulance Services"
+    confidence: 1.0
+  SC0284:
+    name: Air Ambulance
+    taxonomy_key: "Medical > Medical Services > Transportation > Ambulance Services"
+    confidence: 1.0
+  SC0257:
+    name: Traveling Nurses PS
+    taxonomy_key: "Medical > Medical Services > Locum Services"
+    confidence: 0.90
+  SC0083:
+    name: Emotional Wellbeing Services
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.85
+  SC0086:
+    name: Onsite Health Clinic
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.85
+  SC0103:
+    name: BloodBorne Exposures
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.85
+  SC0525:
+    name: Parent Aids
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.80
+  SC0590:
+    name: OhioRISE PPL
+    taxonomy_key: "Medical > Medical Services"
+    confidence: 0.80
+
+  # =========================================================================
+  # EQUIPMENT & MACHINERY
+  # =========================================================================
+  SC0004:
+    name: Minor Equipment
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment"
+    confidence: 0.55
+    ambiguous: true
+  SC0389:
+    name: Capital Equipment
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment"
+    confidence: 0.60
+    ambiguous: true
+  SC0506:
+    name: Minor Equipment - Non-Inventory
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment"
+    confidence: 0.55
+    ambiguous: true
+  SC0193:
+    name: Minor Equipment - Inventory
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment"
+    confidence: 0.55
+    ambiguous: true
+  SC0194:
+    name: Minor Equipment A/P Build
+    taxonomy_key: "Facilities > Equipment & Machinery > Equipment"
+    confidence: 0.55
+    ambiguous: true
+  SC0188:
+    name: Equipment Supplies
+    taxonomy_key: "Facilities > Equipment & Machinery > Consumable & Spare Parts"
+    confidence: 0.90
+  SC0260:
+    name: Equipment Repair
+    taxonomy_key: "Facilities > Equipment & Machinery > Service & Maintenance"
+    confidence: 0.95
+  SC0261:
+    name: Maintenance Agreements
+    taxonomy_key: "Facilities > Equipment & Machinery > Service & Maintenance"
+    confidence: 0.95
+  SC0258:
+    name: Maintenance O/S Contractor
+    taxonomy_key: "Facilities > Equipment & Machinery > Service & Maintenance"
+    confidence: 0.90
+  SC0187:
+    name: Maintenance Supplies
+    taxonomy_key: "Facilities > Equipment & Machinery > Consumable & Spare Parts"
+    confidence: 0.90
+
+  # =========================================================================
+  # FACILITIES / BUILDING MAINTENANCE
+  # =========================================================================
+  SC0184:
+    name: Plumber Supplies
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance > Plumbing Maintenance > Supplies"
+    confidence: 0.95
+  SC0185:
+    name: Electrical Supplies
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance > Electrical Services > Supplies"
+    confidence: 0.95
+  SC0186:
+    name: Carpenter Supplies
+    taxonomy_key: "Facilities > Construction Services"
+    confidence: 0.90
+  SC0183:
+    name: Painters Supplies
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance > Painting Services > Supplies"
+    confidence: 0.95
+  SC0191:
+    name: Grounds Supplies
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance > Landscaping Services"
+    confidence: 0.90
+  SC0259:
+    name: Exterior Upkeep
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance"
+    confidence: 0.85
+  SC0003:
+    name: Buildings
+    taxonomy_key: "Facilities > Construction Services"
+    confidence: 0.90
+  SC0292:
+    name: Exterminating
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance > Pest Control"
+    confidence: 1.0
+  SC0548:
+    name: Other Facility Expense
+    taxonomy_key: "Facilities > Facilities Services > Building Maintenance"
+    confidence: 0.55
+    ambiguous: true
+
+  # =========================================================================
+  # CLEANING & WASTE
+  # =========================================================================
+  SC0189:
+    name: Cleaning Supplies
+    taxonomy_key: "Facilities > Cleaning > Cleaning Supplies"
+    confidence: 1.0
+  SC0208:
+    name: Walk-In Mats
+    taxonomy_key: "Facilities > Cleaning > Cleaning Supplies"
+    confidence: 0.90
+  SC0267:
+    name: Housekeeping Service
+    taxonomy_key: "Facilities > Cleaning > Cleaning Services > Janitorial Services"
+    confidence: 0.95
+  SC0268:
+    name: Window Cleaning
+    taxonomy_key: "Facilities > Cleaning > Cleaning Services > Window Cleaning Services"
+    confidence: 1.0
+  SC0337:
+    name: Laundry
+    taxonomy_key: "Facilities > Cleaning > Laundry Services"
+    confidence: 1.0
+  SC0262:
+    name: Trash Removal
+    taxonomy_key: "Facilities > Waste Management > Refuse Disposal"
+    confidence: 1.0
+  SC0265:
+    name: Infectious Waste
+    taxonomy_key: "Facilities > Waste Management > Refuse Disposal > Hazardous Refuse Disposal"
+    confidence: 1.0
+  SC0266:
+    name: Chemical Waste
+    taxonomy_key: "Facilities > Waste Management > Refuse Disposal > Hazardous Refuse Disposal"
+    confidence: 1.0
+  SC0263:
+    name: Confidential Material Removal
+    taxonomy_key: "Facilities > Waste Management > Refuse Disposal"
+    confidence: 0.90
+  SC0216:
+    name: Water Services
+    taxonomy_key: "Facilities > Waste Management > Water Treatment"
+    confidence: 0.85
+
+  # =========================================================================
+  # OFFICE / OPERATING SUPPLIES
+  # =========================================================================
+  SC0195:
+    name: Office Supplies
+    taxonomy_key: "Facilities > Office Equipment & Supplies > Office Supplies"
+    confidence: 1.0
+  SC0175:
+    name: Consumable Supplies
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.55
+    ambiguous: true
+  SC0172:
+    name: Non-Clin Storerm NonChargeable
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.55
+    ambiguous: true
+  SC0174:
+    name: Non-Clin Storeroom Chargeable
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.55
+    ambiguous: true
+  SC0551:
+    name: Other Office Expense
+    taxonomy_key: "Facilities > Office Equipment & Supplies"
+    confidence: 0.55
+    ambiguous: true
+
+  # =========================================================================
+  # FURNITURE
+  # =========================================================================
+  SC0203:
+    name: Furniture
+    taxonomy_key: "Facilities > Furniture"
+    confidence: 1.0
+
+  # =========================================================================
+  # IT & TELECOMS
+  # =========================================================================
+  SC0201:
+    name: Computer Supplies
+    taxonomy_key: "IT & Telecoms > IT Hardware > Computer Peripherals"
+    confidence: 0.90
+  SC0334:
+    name: Cellular Phone
+    taxonomy_key: "IT & Telecoms > Telecoms > Telecom Hardware"
+    confidence: 0.95
+  SC0287:
+    name: Pagers
+    taxonomy_key: "IT & Telecoms > Telecoms > Telecom Hardware > Pagers"
+    confidence: 1.0
+  SC0332:
+    name: Telephone
+    taxonomy_key: "IT & Telecoms > Telecoms > Telecom Services > Telephony Service"
+    confidence: 0.95
+  SC0333:
+    name: Telephone - Long Distance
+    taxonomy_key: "IT & Telecoms > Telecoms > Telecom Services > Telephony Service"
+    confidence: 0.95
+  SC0286:
+    name: Cable TV
+    taxonomy_key: "IT & Telecoms > Telecoms > Telecom Services"
+    confidence: 0.90
+  SC0180:
+    name: Computer Software
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.95
+  SC0544:
+    name: IS - Software Licenses
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.95
+  SC0543:
+    name: IS - Data Processing & Storage
+    taxonomy_key: "IT & Telecoms > IT Services"
+    confidence: 0.90
+  SC0546:
+    name: IS - Other Expenses
+    taxonomy_key: "IT & Telecoms > IT Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0545:
+    name: IS - Evaluation Forms
+    taxonomy_key: "IT & Telecoms > IT Services"
+    confidence: 0.80
+  SC0542:
+    name: IS - Data Management Fees
+    taxonomy_key: "IT & Telecoms > IT Services"
+    confidence: 0.90
+  SC0328:
+    name: Data Processing
+    taxonomy_key: "IT & Telecoms > IT Services"
+    confidence: 0.90
+  SC0182:
+    name: Data Processing Supplies
+    taxonomy_key: "IT & Telecoms > IT Hardware"
+    confidence: 0.85
+  SC0181:
+    name: Audiovisuals
+    taxonomy_key: "IT & Telecoms > IT Services > Audio / Visual Conferencing"
+    confidence: 0.90
+  SC0179:
+    name: Network Printer Charges
+    taxonomy_key: "IT & Telecoms > IT Hardware > Printer, Copier, Scanner"
+    confidence: 0.90
+  SC0550:
+    name: Internet
+    taxonomy_key: "IT & Telecoms > Network"
+    confidence: 0.95
+  SC0554:
+    name: Website
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.85
+  SC0282:
+    name: CAFM Support
+    taxonomy_key: "IT & Telecoms > Software > Application Software"
+    confidence: 0.85
+
+  # =========================================================================
+  # LOGISTICS / SHIPPING
+  # =========================================================================
+  SC0308:
+    name: Federal Express
+    taxonomy_key: "Logistics > Courier Services"
+    confidence: 1.0
+  SC0314:
+    name: Courier Service
+    taxonomy_key: "Logistics > Courier Services"
+    confidence: 1.0
+  SC0199:
+    name: Freight
+    taxonomy_key: "Logistics > Freight Services"
+    confidence: 1.0
+  SC0200:
+    name: Postage
+    taxonomy_key: "Logistics > Courier Services > Postage Services"
+    confidence: 1.0
+  SC0349:
+    name: Transportation
+    taxonomy_key: "Logistics > Transportation Services"
+    confidence: 0.95
+  SC0290:
+    name: Record Storage & Transport
+    taxonomy_key: "Logistics > Transportation Services"
+    confidence: 0.85
+  SC0345:
+    name: Moving Expense
+    taxonomy_key: "Logistics > Transportation Services"
+    confidence: 0.85
+  SC0135:
+    name: Transport Supplies
+    taxonomy_key: "Logistics > Transportation Services"
+    confidence: 0.85
+
+  # =========================================================================
+  # PRINTING & MARKETING
+  # =========================================================================
+  SC0177:
+    name: Print Shop
+    taxonomy_key: "Marketing > Print > Print Services > Printing & Copying Services"
+    confidence: 0.95
+  SC0178:
+    name: Copying Charges
+    taxonomy_key: "Marketing > Print > Print Services > Printing & Copying Services"
+    confidence: 0.90
+  SC0283:
+    name: Outside Printing
+    taxonomy_key: "Marketing > Print > Print Services > Printing & Copying Services"
+    confidence: 0.95
+  SC0202:
+    name: Posters/Abstracts
+    taxonomy_key: "Marketing > Print > Print Services > Printing & Copying Services"
+    confidence: 0.90
+  SC0635:
+    name: Manual prepaid
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0310:
+    name: Marketing & Communications
+    taxonomy_key: "Marketing > Media and Communications"
+    confidence: 0.95
+  SC0215:
+    name: Promotional Material
+    taxonomy_key: "Marketing > Merchandising > Promotional Items"
+    confidence: 0.95
+  SC0214:
+    name: Promotional Material Recognitn
+    taxonomy_key: "Marketing > Merchandising > Promotional Items"
+    confidence: 0.90
+  SC0297:
+    name: Publishing Research Papers
+    taxonomy_key: "Marketing > Publications"
+    confidence: 0.90
+  SC0348:
+    name: Sponsorship
+    taxonomy_key: "Marketing > Advertising"
+    confidence: 0.85
+  SC0350:
+    name: Outreach Program
+    taxonomy_key: "Marketing > Events > Events Management"
+    confidence: 0.85
+  SC0351:
+    name: Promotional Mtg & Event
+    taxonomy_key: "Marketing > Events > Events Management"
+    confidence: 0.90
+  SC0347:
+    name: Surveys & Special Events
+    taxonomy_key: "Marketing > Events > Events Management"
+    confidence: 0.85
+  SC0370:
+    name: Conference Vendor Expense
+    taxonomy_key: "Marketing > Events > Events Management"
+    confidence: 0.85
+  SC0581:
+    name: Special Event Expense
+    taxonomy_key: "Marketing > Events > Events Management"
+    confidence: 0.85
+  SC0311:
+    name: Community Education
+    taxonomy_key: "Marketing > Events > Events Management"
+    confidence: 0.80
+  SC0557:
+    name: Other Marketing/PR
+    taxonomy_key: "Marketing > PR"
+    confidence: 0.85
+  SC0553:
+    name: Materials/Materials Production
+    taxonomy_key: "Marketing > Merchandising"
+    confidence: 0.80
+
+  # =========================================================================
+  # PUBLICATIONS
+  # =========================================================================
+  SC0197:
+    name: Books/Journals
+    taxonomy_key: "Medical > Learning Resources > Printed Publications"
+    confidence: 0.95
+  SC0526:
+    name: Books & Resource Materials
+    taxonomy_key: "Medical > Learning Resources > Printed Publications"
+    confidence: 0.95
+  SC0198:
+    name: Periodicals
+    taxonomy_key: "Marketing > Publications > Printed Publications"
+    confidence: 0.90
+  SC0378:
+    name: Subscriptions
+    taxonomy_key: "Marketing > Publications"
+    confidence: 0.85
+
+  # =========================================================================
+  # PROFESSIONAL SERVICES
+  # =========================================================================
+  SC0250:
+    name: Contracted Services
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0245:
+    name: Consulting Fees
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 1.0
+  SC0325:
+    name: Legal Fees
+    taxonomy_key: "Professional Services > Legal > Legal Services"
+    confidence: 1.0
+  SC0306:
+    name: Visa Legal Fees
+    taxonomy_key: "Professional Services > Legal > Legal Services"
+    confidence: 0.95
+  SC0076:
+    name: Outside Salaries
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0276:
+    name: Interpreter Services
+    taxonomy_key: "Professional Services > Language Services > Interpreting Services"
+    confidence: 1.0
+  SC0277:
+    name: Over Phone Interpreter Service
+    taxonomy_key: "Professional Services > Language Services > Interpreting Services"
+    confidence: 1.0
+  SC0275:
+    name: Video Interpreter Services
+    taxonomy_key: "Professional Services > Language Services > Interpreting Services"
+    confidence: 1.0
+  SC0313:
+    name: Translations
+    taxonomy_key: "Professional Services > Language Services > Written Translation Services"
+    confidence: 1.0
+  SC0315:
+    name: Transcription Services
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.80
+  SC0294:
+    name: Photography PS
+    taxonomy_key: "Professional Services > Photography Services"
+    confidence: 0.95
+  SC0212:
+    name: Photography Supplies
+    taxonomy_key: "Professional Services > Photography Services"
+    confidence: 0.90
+  SC0317:
+    name: Security Services
+    taxonomy_key: "Facilities > Facilities Services > Security > Security Services"
+    confidence: 0.95
+  SC0246:
+    name: Collection Fees
+    taxonomy_key: "Professional Services > Financial Services > Collection Agencies"
+    confidence: 0.95
+  SC0316:
+    name: Billing/Collection Services
+    taxonomy_key: "Professional Services > Financial Services > Medical Billing"
+    confidence: 0.95
+  SC0523:
+    name: Accounting Fees
+    taxonomy_key: "Professional Services > Financial Services > Accounting Services > General Accounting Services"
+    confidence: 1.0
+  SC0327:
+    name: Auditing Fees
+    taxonomy_key: "Professional Services > Financial Services > Accounting Services > General Accounting Services"
+    confidence: 0.95
+  SC0271:
+    name: Purchased Services
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0272:
+    name: Purchased Service A/P Build
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0255:
+    name: Subdelegate Services
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0296:
+    name: Contracted Division Support
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0251:
+    name: Independent Contractor Expense
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.85
+  SC0304:
+    name: Management Fees
+    taxonomy_key: "Professional Services > Consulting > Management Consulting"
+    confidence: 0.90
+  SC0256:
+    name: Temporary Salaries
+    taxonomy_key: "Human Resources > Resourcing > Contractors"
+    confidence: 0.85
+  SC0291:
+    name: Long Term Service
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0524:
+    name: Grant Writing/Fundraising
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0248:
+    name: Lobbying Expense
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.80
+  SC0374:
+    name: Program Development
+    taxonomy_key: "Professional Services > Consulting > General Consulting Services"
+    confidence: 0.55
+    ambiguous: true
+  SC0362:
+    name: Flowers
+    taxonomy_key: "Professional Services > Florists"
+    confidence: 1.0
+
+  # =========================================================================
+  # INSURANCE
+  # =========================================================================
+  SC0105:
+    name: Insurance Disability
+    taxonomy_key: "Professional Services > Insurance"
+    confidence: 0.90
+  SC0320:
+    name: Insurance - Property & Casualty
+    taxonomy_key: "Professional Services > Insurance > Property Insurance"
+    confidence: 0.95
+  SC0321:
+    name: Insurance - Physicians
+    taxonomy_key: "Professional Services > Insurance > Business Insurance"
+    confidence: 0.90
+  SC0322:
+    name: Insurance - Malpractice
+    taxonomy_key: "Professional Services > Insurance > Business Insurance"
+    confidence: 0.90
+  SC0561:
+    name: Insurance/Business (D&O)
+    taxonomy_key: "Professional Services > Insurance > Business Insurance"
+    confidence: 0.95
+  SC0102:
+    name: Workmans Compensation
+    taxonomy_key: "Professional Services > Insurance > Business Insurance"
+    confidence: 0.90
+  SC0101:
+    name: Group Life Insurance
+    taxonomy_key: "Professional Services > Insurance > Life Insurance"
+    confidence: 0.95
+  SC0366:
+    name: Stop Loss Expense
+    taxonomy_key: "Professional Services > Insurance > Business Insurance"
+    confidence: 0.85
+  SC0029:
+    name: Optional Life Insurance
+    taxonomy_key: "Professional Services > Insurance > Life Insurance"
+    confidence: 0.95
+  SC0031:
+    name: Supplemental Accident
+    taxonomy_key: "Professional Services > Insurance"
+    confidence: 0.85
+  SC0032:
+    name: Supplemental Life & AD&D
+    taxonomy_key: "Professional Services > Insurance > Life Insurance"
+    confidence: 0.95
+  SC0036:
+    name: Supplemental Critical Illness
+    taxonomy_key: "Professional Services > Insurance > Health Insurance"
+    confidence: 0.90
+  SC0037:
+    name: Hospital Indemnity
+    taxonomy_key: "Professional Services > Insurance > Health Insurance"
+    confidence: 0.90
+  SC0035:
+    name: Home & Auto Coverage Benefit
+    taxonomy_key: "Professional Services > Insurance > Property Insurance"
+    confidence: 0.85
+  SC0038:
+    name: Pet Insurance
+    taxonomy_key: "Professional Services > Insurance"
+    confidence: 0.85
+  SC0091:
+    name: Anthem/HDP Admin Fee
+    taxonomy_key: "Professional Services > Insurance > Health Insurance"
+    confidence: 0.85
+  SC0092:
+    name: ACA Reporting Services
+    taxonomy_key: "Professional Services > Insurance > Health Insurance"
+    confidence: 0.85
+  SC0093:
+    name: Fertility Benefits
+    taxonomy_key: "Professional Services > Insurance > Health Insurance"
+    confidence: 0.85
+  SC0094:
+    name: Health Advocacy - Quantum
+    taxonomy_key: "Professional Services > Insurance > Health Insurance"
+    confidence: 0.85
+  SC0021:
+    name: HDP Select J1/J2 Visa - Expense
+    taxonomy_key: "Professional Services > Insurance > Health Insurance"
+    confidence: 0.80
+  SC0033:
+    name: Surgical Services LTD
+    taxonomy_key: "Professional Services > Insurance"
+    confidence: 0.80
+  SC0030:
+    name: Cinti Casualty Ins Co W/H
+    taxonomy_key: "Professional Services > Insurance"
+    confidence: 0.85
+  SC0046:
+    name: ARAG Legal Plan
+    taxonomy_key: "Professional Services > Insurance"
+    confidence: 0.85
+  SC0047:
+    name: Identity Protection Benefit
+    taxonomy_key: "Professional Services > Insurance"
+    confidence: 0.85
+
+  # =========================================================================
+  # HUMAN RESOURCES
+  # =========================================================================
+  SC0293:
+    name: Recruitment & Advertising
+    taxonomy_key: "Human Resources > Resourcing > Recruitment"
+    confidence: 0.95
+  SC0361:
+    name: Recruitment
+    taxonomy_key: "Human Resources > Resourcing > Recruitment"
+    confidence: 1.0
+  SC0344:
+    name: Emp Activity & Recognition
+    taxonomy_key: "Human Resources > Employee Benefits > Employee Recognition"
+    confidence: 0.95
+  SC0210:
+    name: Uniforms
+    taxonomy_key: "Facilities > Uniform"
+    confidence: 0.95
+  SC0211:
+    name: Clothing
+    taxonomy_key: "Facilities > Uniform"
+    confidence: 0.90
+  SC0346:
+    name: Training Seminars
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.95
+  SC0196:
+    name: Education & Training Material
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.95
+  SC0110:
+    name: Tuition Reimbursement
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.90
+  SC0112:
+    name: Fellows Tuition Reimbursement
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.90
+  SC0380:
+    name: Tuition Expense
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.90
+  SC0560:
+    name: Staff Development
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.90
+  SC0074:
+    name: Bonus
+    taxonomy_key: "Finance > Fees > Bonuses"
+    confidence: 0.95
+  SC0340:
+    name: Employee Settlements
+    taxonomy_key: "Finance > Fees > Reimbursements"
+    confidence: 0.85
+  SC0288:
+    name: Employee Benefit Service
+    taxonomy_key: "Human Resources > Employee Benefits"
+    confidence: 0.85
+  SC0026:
+    name: YMCA Fitness
+    taxonomy_key: "Human Resources > Employee Benefits"
+    confidence: 0.85
+  SC0027:
+    name: UC Fitness
+    taxonomy_key: "Human Resources > Employee Benefits"
+    confidence: 0.85
+  SC0039:
+    name: Child Care CCHMC
+    taxonomy_key: "Human Resources > Employee Benefits"
+    confidence: 0.85
+  SC0084:
+    name: Wellness Program Activities
+    taxonomy_key: "Human Resources > Employee Benefits"
+    confidence: 0.85
+  SC0085:
+    name: Wellness Family Support
+    taxonomy_key: "Human Resources > Employee Benefits"
+    confidence: 0.85
+  SC0289:
+    name: Ward Attending Subsidy
+    taxonomy_key: "Finance > Fees > Reimbursements"
+    confidence: 0.80
+
+  # =========================================================================
+  # TRAINING / WORKSHOP SERIES
+  # =========================================================================
+  SC0399:
+    name: TE Seminars/Meeting Fees
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.85
+  SC0531:
+    name: Workshop/Programs - Supplies & Materials
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.85
+  SC0532:
+    name: Workshop/Programs - Speaker Fees & Expenses
+    taxonomy_key: "Marketing > Events > Speakers"
+    confidence: 0.90
+  SC0534:
+    name: Workshop/Programs - Awards
+    taxonomy_key: "Human Resources > Employee Benefits > Employee Recognition"
+    confidence: 0.85
+  SC0535:
+    name: Workshop/Programs - Other Expenses
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.80
+  SC0530:
+    name: Workshop/Programs - Development
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.85
+  SC0536:
+    name: Training - Supplies & Materials
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.90
+  SC0537:
+    name: Training - Trainer Fees & Expenses
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.90
+  SC0538:
+    name: Training - Food & Drink
+    taxonomy_key: "Facilities > Food & Beverage"
+    confidence: 0.85
+  SC0533:
+    name: Workshop/Programs - Food & Drink
+    taxonomy_key: "Facilities > Food & Beverage"
+    confidence: 0.85
+  SC0539:
+    name: Training - Management Fees
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.85
+  SC0541:
+    name: Training - Other Expense
+    taxonomy_key: "Human Resources > Learning & Development > Training"
+    confidence: 0.80
+
+  # =========================================================================
+  # FOOD & BEVERAGE / CATERING
+  # =========================================================================
+  SC0335:
+    name: Food
+    taxonomy_key: "Facilities > Food & Beverage"
+    confidence: 0.95
+  SC0372:
+    name: Outside Catering
+    taxonomy_key: "Facilities > Facilities Services > Catering > Catering Services"
+    confidence: 1.0
+  SC0318:
+    name: Food Srvc Purchased Services
+    taxonomy_key: "Facilities > Facilities Services > Catering > Catering Services"
+    confidence: 0.90
+  SC0558:
+    name: General Meetings/Meals
+    taxonomy_key: "Facilities > Food & Beverage"
+    confidence: 0.85
+  SC0404:
+    name: Alcohol
+    taxonomy_key: "Facilities > Food & Beverage > Beverages"
+    confidence: 0.90
+  SC0599:
+    name: Sodexo Invoice payment
+    taxonomy_key: "Facilities > Facilities Services > Catering > Catering Services"
+    confidence: 0.90
+  SC0386:
+    name: Hospitality Services
+    taxonomy_key: "Facilities > Facilities Services > Catering > Catering Services"
+    confidence: 0.85
+
+  # =========================================================================
+  # TRAVEL
+  # =========================================================================
+  SC0356:
+    name: Conference & Travel
+    taxonomy_key: "Travel"
+    confidence: 0.90
+  SC0354:
+    name: Offsite Meeting/Confernce Exp
+    taxonomy_key: "Travel > Venue Hire"
+    confidence: 0.85
+  SC0355:
+    name: Airfare Travel Fees
+    taxonomy_key: "Travel > Transportation > Flight"
+    confidence: 1.0
+  SC0359:
+    name: Conf & Travel Externally Reimb
+    taxonomy_key: "Travel"
+    confidence: 0.85
+  SC0357:
+    name: Presenter Conference & Travel
+    taxonomy_key: "Travel"
+    confidence: 0.85
+  SC0352:
+    name: Concierge Expense
+    taxonomy_key: "Travel"
+    confidence: 0.80
+
+  # =========================================================================
+  # FINANCE / FEES / TAXES
+  # =========================================================================
+  SC0280:
+    name: Consortium > $25000
+    taxonomy_key: "Finance > Funds > Grant Funds"
+    confidence: 0.90
+  SC0279:
+    name: Consortium <= $25000
+    taxonomy_key: "Finance > Funds > Grant Funds"
+    confidence: 0.90
+  SC0273:
+    name: Research Support
+    taxonomy_key: "Finance > Funds > Grant Funds"
+    confidence: 0.85
+  SC0323:
+    name: Interest Expense
+    taxonomy_key: "Finance > Loan Payment > Interest"
+    confidence: 0.95
+  SC0307:
+    name: Bond Expenses
+    taxonomy_key: "Finance > Loan Payment"
+    confidence: 0.90
+  SC0298:
+    name: Bank Charges
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.90
+  SC0299:
+    name: Investment Management Expense
+    taxonomy_key: "Professional Services > Financial Services > Banking and Investment"
+    confidence: 0.90
+  SC0309:
+    name: Accreditation Fees
+    taxonomy_key: "Finance > Fees > Licenses & Permits"
+    confidence: 0.90
+  SC0326:
+    name: Patent Exp Fees
+    taxonomy_key: "Finance > Fees > Licenses & Permits"
+    confidence: 0.90
+  SC0375:
+    name: Certifications
+    taxonomy_key: "Finance > Fees > Licenses & Permits"
+    confidence: 0.90
+  SC0377:
+    name: Exam Fees
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.85
+  SC0303:
+    name: Government and Insurance Fees
+    taxonomy_key: "Finance > Fees > Government Fees"
+    confidence: 0.90
+  SC0376:
+    name: Dues
+    taxonomy_key: "Professional Services > Association & Membership fees"
+    confidence: 0.95
+  SC0381:
+    name: Royalty Expense
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.85
+  SC0392:
+    name: Kentucky Tax
+    taxonomy_key: "Finance > Fees > Tax"
+    confidence: 0.95
+  SC0373:
+    name: UC Tax
+    taxonomy_key: "Finance > Fees > Tax"
+    confidence: 0.95
+  SC0421:
+    name: Ohio Sales Tax
+    taxonomy_key: "Finance > Fees > Tax"
+    confidence: 1.0
+  SC0371:
+    name: Property Taxes
+    taxonomy_key: "Finance > Fees > Tax"
+    confidence: 1.0
+  SC0436:
+    name: UBIT Local Tax
+    taxonomy_key: "Finance > Fees > Tax"
+    confidence: 0.95
+  SC0438:
+    name: Unemployment Tax
+    taxonomy_key: "Finance > Fees > Tax"
+    confidence: 0.95
+  SC0364:
+    name: Subject Reimbursement
+    taxonomy_key: "Finance > Fees > Reimbursements"
+    confidence: 0.85
+  SC0249:
+    name: Honorarium
+    taxonomy_key: "Finance > Funds > Honorarium"
+    confidence: 1.0
+  SC0360:
+    name: Conference & Travel Honorarium
+    taxonomy_key: "Finance > Funds > Honorarium"
+    confidence: 0.90
+  SC0435:
+    name: Grants Billing Refunds
+    taxonomy_key: "Finance > Fees > Reimbursements"
+    confidence: 0.85
+  SC0431:
+    name: Misc Billing Refunds
+    taxonomy_key: "Finance > Fees > Reimbursements"
+    confidence: 0.85
+  SC0432:
+    name: Lab Billing Refunds
+    taxonomy_key: "Finance > Fees > Reimbursements"
+    confidence: 0.85
+  SC0338:
+    name: Settlements
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0343:
+    name: Advisory Council
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0434:
+    name: 5/3 Credit Card
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0625:
+    name: ERP Earnings
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0598:
+    name: Cost Report true-up
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0637:
+    name: TCH Donations Recd at CCHMC
+    taxonomy_key: "Finance > Donations"
+    confidence: 0.95
+  SC0642:
+    name: CCHMC Match of TCH Donations
+    taxonomy_key: "Finance > Donations"
+    confidence: 0.95
+
+  # =========================================================================
+  # LEASES & REAL ESTATE
+  # =========================================================================
+  SC0005:
+    name: Finance Lease
+    taxonomy_key: "Facilities > Real Estate > Property"
+    confidence: 0.90
+  SC0009:
+    name: Operating Lease
+    taxonomy_key: "Facilities > Real Estate > Property"
+    confidence: 0.90
+  SC0270:
+    name: Rent/Lease Expense
+    taxonomy_key: "Facilities > Real Estate > Property"
+    confidence: 0.95
+  SC0547:
+    name: Lease & Utilities
+    taxonomy_key: "Facilities > Utilities"
+    confidence: 0.85
+  SC0001:
+    name: Land
+    taxonomy_key: "Facilities > Real Estate > Property"
+    confidence: 0.95
+
+  # =========================================================================
+  # UTILITIES
+  # =========================================================================
+  SC0329:
+    name: Electricity
+    taxonomy_key: "Facilities > Utilities > Electricity"
+    confidence: 1.0
+  SC0330:
+    name: Gas
+    taxonomy_key: "Facilities > Utilities > Oil And Gas"
+    confidence: 0.95
+  SC0331:
+    name: Water
+    taxonomy_key: "Facilities > Utilities > Water\u00a0& Sewer"
+    confidence: 0.95
+  SC0415:
+    name: Utilities
+    taxonomy_key: "Facilities > Utilities"
+    confidence: 0.90
+
+  # =========================================================================
+  # VEHICLES
+  # =========================================================================
+  SC0218:
+    name: Vehicle Maintenance Supplies
+    taxonomy_key: "Facilities > Vehicles > Vehicle Maintenance"
+    confidence: 0.95
+  SC0353:
+    name: Gasoline/Van
+    taxonomy_key: "Facilities > Vehicles > Fuel"
+    confidence: 0.95
+  SC0006:
+    name: Vehicles
+    taxonomy_key: "Facilities > Vehicles > Vehicle Purchase"
+    confidence: 0.95
+  SC0190:
+    name: Parking Lot Supplies
+    taxonomy_key: "Travel > Parking"
+    confidence: 0.85
+
+  # =========================================================================
+  # PAYROLL DEDUCTIONS (non-procurement - mapped to closest Finance/HR)
+  # =========================================================================
+  SC0025:
+    name: Garnishment Withholding
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0041:
+    name: United Appeal Withholding
+    taxonomy_key: "Finance > Donations"
+    confidence: 0.85
+  SC0042:
+    name: Payroll Miscellaneous Deduction
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0043:
+    name: Payroll deducted donation 1
+    taxonomy_key: "Finance > Donations"
+    confidence: 0.85
+  SC0044:
+    name: Artswave
+    taxonomy_key: "Finance > Donations"
+    confidence: 0.85
+  SC0049:
+    name: American Heart Association
+    taxonomy_key: "Finance > Donations"
+    confidence: 0.85
+  SC0604:
+    name: IRS Payroll Deductions
+    taxonomy_key: "Finance > Fees > Tax"
+    confidence: 0.85
+  SC0012:
+    name: ADP Withholding
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0057:
+    name: Other Bonds Payable
+    taxonomy_key: "Finance > Loan Payment"
+    confidence: 0.80
+  SC0060:
+    name: Reserve For Unemployment Compensation
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0097:
+    name: Retirement - Service Cost
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0106:
+    name: STD Administrative Fees
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0517:
+    name: CHMC Staff Salary
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0521:
+    name: CHMC Staff Fringe
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0045:
+    name: Parking, Equipment, & Keys
+    taxonomy_key: "Travel > Parking"
+    confidence: 0.80
+  SC0079:
+    name: Professor Compensation
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0636:
+    name: Co-op/Jr. Co-op Payment
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  SC0632:
+    name: Kroger - OTPT Payment
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+
+  # =========================================================================
+  # UC / INTERCOMPANY
+  # =========================================================================
+  SC0423:
+    name: University Hospital
+    taxonomy_key: "Finance > Intercompany"
+    confidence: 0.90
+  SC0424:
+    name: UC Developmental Biology
+    taxonomy_key: "Finance > Intercompany"
+    confidence: 0.90
+  SC0425:
+    name: UC BMRT
+    taxonomy_key: "Finance > Intercompany"
+    confidence: 0.90
+  SC0426:
+    name: UC BMI
+    taxonomy_key: "Finance > Intercompany"
+    confidence: 0.90
+  SC0427:
+    name: UC Immunobiology
+    taxonomy_key: "Finance > Intercompany"
+    confidence: 0.90
+
+  # =========================================================================
+  # MISCELLANEOUS / AMBIGUOUS (low confidence - may benefit from embedding fallback)
+  # =========================================================================
+  SC0207:
+    name: Miscellaneous Supplies
+    taxonomy_key: "Facilities > Operating Supplies and Equipment"
+    confidence: 0.50
+    ambiguous: true
+  SC0341:
+    name: Miscellaneous Expense
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.50
+    ambiguous: true
+  SC0582:
+    name: Misc/Uncategorized Expense
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.50
+    ambiguous: true
+  SC0562:
+    name: Other Business Expense
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.50
+    ambiguous: true
+  SC0217:
+    name: Toys
+    taxonomy_key: "Medical > Medical Equipment > Medical Facility Equipment"
+    confidence: 0.80
+  SC0527:
+    name: Developmental Toys
+    taxonomy_key: "Medical > Medical Equipment > Medical Facility Equipment"
+    confidence: 0.80
+  SC0528:
+    name: Special Needs
+    taxonomy_key: "Medical > Medical Equipment"
+    confidence: 0.80
+  SC0176:
+    name: Supply Rebate
+    taxonomy_key: "Finance > Fees > Reimbursements"
+    confidence: 0.80
+  # =========================================================================
+  # DNU (Do Not Use) CODES
+  # =========================================================================
+  "DNU SC0633":
+    name: PO Issues - Assets
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  "DNU SC0634":
+    name: PO Issues - Liabilities
+    taxonomy_key: "Finance > Fees"
+    confidence: 0.80
+  "DNU SC0504":
+    name: Dues - Professional Expense (Inactive)
+    taxonomy_key: "Professional Services > Association & Membership fees"
+    confidence: 0.80
+

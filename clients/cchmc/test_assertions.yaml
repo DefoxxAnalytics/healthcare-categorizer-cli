@@ -1,0 +1,28 @@
+known_supplier_mappings:
+  - category_code: "SC0250"
+    supplier: "epic systems"
+    expected_taxonomy: "IT & Telecoms > Software > Application Software"
+  - category_code: "SC0250"
+    supplier: "kpmg"
+    expected_taxonomy: "Professional Services > Financial Services > Accounting Services > General Accounting Services"
+  - category_code: "SC0250"
+    supplier: "quest diagnostics"
+    expected_taxonomy: "Medical > Medical Services"
+  - category_code: "SC0250"
+    supplier: "crothall"
+    expected_taxonomy: "Facilities > Cleaning > Cleaning Services"
+  - category_code: "SC0207"
+    supplier: "grainger"
+    expected_taxonomy: "Facilities > Operating Supplies and Equipment"
+  - category_code: "SC0207"
+    supplier: "uline"
+    expected_taxonomy: "Facilities > Operating Supplies and Equipment"
+  - category_code: "SC0250"
+    supplier: "cintas"
+    expected_taxonomy: "Facilities > Cleaning > Cleaning Services"
+
+min_rule_counts:
+  supplier_rules: 230
+  context_rules: 8
+  cost_center_rules: 10
+  supplier_override_rules: 11

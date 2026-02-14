@@ -1,0 +1,52 @@
+client:
+  name: "CCHMC"
+  description: "Cincinnati Children's Hospital Medical Center — Workday AP/Procurement"
+
+paths:
+  input: "data/input/cchmc-ftp-new.csv"
+  sc_mapping: "data/reference/sc_code_mapping.yaml"
+  taxonomy: "../../shared/reference/Healthcare Taxonomy v2.9.xlsx"
+  keyword_rules: "data/reference/keyword_rules.yaml"
+  refinement_rules: "data/reference/cchmc_refinement_rules.yaml"
+  output_dir: "output"
+  output_prefix: "cchmc_categorization_results"
+
+columns:
+  spend_category: "Spend Category"
+  supplier: "Supplier"
+  line_memo: "Line Memo"
+  line_of_service: "Line of Service"
+  cost_center: "Cost Center"
+  amount: "Invoice Line Amount"
+  passthrough:
+    - "Invoice Number"
+    - "Invoice Line"
+    - "Invoice Date"
+    - "Invoice Status"
+    - "Invoice Amount"
+    - "Invoice Line Amount"
+    - "Payment Status"
+    - "Payment Type"
+    - "Fund"
+    - "Program"
+    - "Grant"
+    - "Funding Source"
+    - "PO Type"
+    - "Spend Type"
+    - "Company"
+
+classification:
+  sc_code_pattern: '((?:DNU\s+)?SC\d+)'
+  confidence_high: 0.7
+  confidence_medium: 0.5
+
+aggregations:
+  - name: "Spend by Cost Center (Top 100)"
+    column: "Cost Center"
+    top_n: 100
+  - name: "Spend by Line of Service"
+    column: "Line of Service"
+    top_n: null
+  - name: "Spend by Fund (Top 30)"
+    column: "Fund"
+    top_n: 30
