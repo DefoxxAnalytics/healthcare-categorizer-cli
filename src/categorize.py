@@ -132,17 +132,11 @@ def load_taxonomy(path: Path) -> pd.DataFrame:
 
 
 def build_taxonomy_lookup(taxonomy_df: pd.DataFrame) -> dict[str, dict]:
-    lookup = {}
-    for _, row in taxonomy_df.iterrows():
-        key = row['Key']
-        lookup[key] = {
-            'CategoryLevel1': row['CategoryLevel1'],
-            'CategoryLevel2': row['CategoryLevel2'],
-            'CategoryLevel3': row['CategoryLevel3'],
-            'CategoryLevel4': row.get('CategoryLevel4', ''),
-            'CategoryLevel5': row.get('CategoryLevel5', ''),
-        }
-    return lookup
+    level_cols = ['CategoryLevel1', 'CategoryLevel2', 'CategoryLevel3', 'CategoryLevel4', 'CategoryLevel5']
+    for col in level_cols:
+        if col not in taxonomy_df.columns:
+            taxonomy_df[col] = ''
+    return taxonomy_df.set_index('Key')[level_cols].to_dict('index')
 
 
 def load_keyword_rules(path: Path) -> list[dict]:
@@ -355,18 +349,29 @@ def main(config: dict):
 
     unclassified = (method == '').copy()
 
+    code_row_map = category_code.groupby(category_code).groups
+
+    def _rows_for_codes(codes):
+        idx = pd.Index([], dtype='int64')
+        for c in codes:
+            if c in code_row_map:
+                idx = idx.union(code_row_map[c])
+        return idx
+
     # Tier 2: Supplier refinement
     tier2_count = 0
     for rule in refinement['supplier_rules']:
         if not unclassified.any():
             break
-        code_match = category_code.isin(rule['category_codes'])
-        candidate = unclassified & code_match
-        if not candidate.any():
+        rule_idx = _rows_for_codes(rule['category_codes'])
+        if rule_idx.empty:
             continue
-        cand_idx = candidate[candidate].index
+        cand_idx = unclassified.loc[rule_idx]
+        cand_idx = cand_idx[cand_idx].index
+        if cand_idx.empty:
+            continue
         supplier_match = supplier.loc[cand_idx].str.contains(
-            rule['supplier_pattern'], case=False, na=False, regex=True
+            rule['_compiled'], na=False, regex=True
         )
         hit_idx = cand_idx[supplier_match.values]
         if len(hit_idx) > 0:
@@ -384,7 +389,7 @@ def main(config: dict):
             break
         uncl_idx = unclassified[unclassified].index
         kw_match = combined_text.loc[uncl_idx].str.contains(
-            rule['pattern'], case=False, na=False, regex=True
+            rule['_compiled'], na=False, regex=True
         )
         hit_idx = uncl_idx[kw_match.values]
         if len(hit_idx) > 0:
@@ -401,13 +406,15 @@ def main(config: dict):
         for rule in refinement['context_rules']:
             if not unclassified.any():
                 break
-            code_match = category_code.isin(rule['category_codes'])
-            candidate = unclassified & code_match
-            if not candidate.any():
+            rule_idx = _rows_for_codes(rule['category_codes'])
+            if rule_idx.empty:
                 continue
-            cand_idx = candidate[candidate].index
+            cand_idx = unclassified.loc[rule_idx]
+            cand_idx = cand_idx[cand_idx].index
+            if cand_idx.empty:
+                continue
             los_match = line_of_service.loc[cand_idx].str.contains(
-                rule['line_of_service_pattern'], case=False, na=False, regex=True
+                rule['_compiled'], na=False, regex=True
             )
             hit_idx = cand_idx[los_match.values]
             if len(hit_idx) > 0:
@@ -426,13 +433,15 @@ def main(config: dict):
         for rule in refinement['cost_center_rules']:
             if not unclassified.any():
                 break
-            code_match = category_code.isin(rule['category_codes'])
-            candidate = unclassified & code_match
-            if not candidate.any():
+            rule_idx = _rows_for_codes(rule['category_codes'])
+            if rule_idx.empty:
                 continue
-            cand_idx = candidate[candidate].index
+            cand_idx = unclassified.loc[rule_idx]
+            cand_idx = cand_idx[cand_idx].index
+            if cand_idx.empty:
+                continue
             cc_match = cost_center.loc[cand_idx].str.contains(
-                rule['cost_center_pattern'], case=False, na=False, regex=True
+                rule['_compiled'], na=False, regex=True
             )
             hit_idx = cand_idx[cc_match.values]
             if len(hit_idx) > 0:
@@ -462,27 +471,27 @@ def main(config: dict):
         confidence[still_unclassified] = 0.0
         print(f"  Unmapped: {still_unclassified.sum():,} rows")
 
-    # Taxonomy level lookup
-    tax_l1 = pd.Series({k: v['CategoryLevel1'] for k, v in taxonomy_lookup.items()})
-    tax_l2 = pd.Series({k: v['CategoryLevel2'] for k, v in taxonomy_lookup.items()})
-    tax_l3 = pd.Series({k: v['CategoryLevel3'] for k, v in taxonomy_lookup.items()})
-    tax_l4 = pd.Series({k: v['CategoryLevel4'] for k, v in taxonomy_lookup.items()})
-    tax_l5 = pd.Series({k: v['CategoryLevel5'] for k, v in taxonomy_lookup.items()})
-
-    cat_l1 = taxonomy_key.map(tax_l1).fillna('')
-    cat_l2 = taxonomy_key.map(tax_l2).fillna('')
-    cat_l3 = taxonomy_key.map(tax_l3).fillna('')
-    cat_l4 = taxonomy_key.map(tax_l4).fillna('')
-    cat_l5 = taxonomy_key.map(tax_l5).fillna('')
+    # Taxonomy level lookup — single DataFrame join instead of 5 separate .map() calls
+    tax_levels_df = pd.DataFrame.from_dict(taxonomy_lookup, orient='index')
+    tax_joined = taxonomy_key.to_frame('_tk').join(tax_levels_df, on='_tk', how='left').fillna('')
+    cat_l1 = tax_joined['CategoryLevel1']
+    cat_l2 = tax_joined['CategoryLevel2']
+    cat_l3 = tax_joined['CategoryLevel3']
+    cat_l4 = tax_joined['CategoryLevel4']
+    cat_l5 = tax_joined['CategoryLevel5']
 
     # Tier 7: Supplier override (post-classification)
     tier7_count = 0
     for rule in refinement['supplier_override_rules']:
-        supplier_hit = supplier.str.contains(
-            rule['supplier_pattern'], case=False, na=False, regex=True
-        )
         l1_hit = cat_l1.isin(rule['override_from_l1'])
-        hit = supplier_hit & l1_hit
+        if not l1_hit.any():
+            continue
+        l1_idx = l1_hit[l1_hit].index
+        supplier_hit = pd.Series(False, index=df.index, dtype=bool)
+        supplier_hit.loc[l1_idx] = supplier.loc[l1_idx].str.contains(
+            rule['_compiled'], na=False, regex=True
+        )
+        hit = supplier_hit
         if hit.any():
             cat_info = taxonomy_lookup.get(rule['taxonomy_key'], {})
             if not cat_info:
