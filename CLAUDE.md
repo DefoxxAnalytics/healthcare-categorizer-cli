@@ -28,7 +28,7 @@ healthcare-categorization-cli/
 │   │   │   ├── input/                   # Transaction CSV/XLSX files
 │   │   │   └── reference/               # YAML rules (category_mapping, refinement_rules, keyword_rules)
 │   │   └── test_assertions.yaml         # Optional: known mappings, min rule counts
-│   └── uch/                             # University of Colorado (Oracle Fusion, XLSX, UNSPSC codes)
+│   └── uch/                             # University of Cincinnati Health (Oracle Fusion, XLSX, UNSPSC codes)
 │       └── (same structure as cchmc)
 └── shared/
     └── reference/
@@ -87,16 +87,25 @@ python -m pytest tests/ --client-dir clients/uch -v
 
 ## 7-Tier Waterfall Logic
 
-Transactions are classified in this order (first match wins):
-1. **Category code + supplier refinement**: Exact match on category_codes list + supplier regex
-2. **Category code + context refinement**: Exact match + line_of_service regex (if has_line_of_service)
-3. **Category code + cost center refinement**: Exact match + cost_center regex (if has_cost_center)
-4. **Supplier override**: Supplier regex + override_from_l1 taxonomy filter
-5. **Category mapping**: Extract code from category_source via regex, map to taxonomy key
-6. **Keyword rules**: Description regex → taxonomy key (if has_description)
-7. **Unclassified**: No match (flagged for manual review)
+Transactions are classified in this order (first match wins for Tiers 1-6, Tier 7 is post-classification):
+1. **Tier 1 — Category Code Mapping**: Non-ambiguous code → taxonomy key (vectorized `isin` + `map`)
+2. **Tier 2 — Supplier Refinement**: Code + supplier regex (pre-compiled, code-indexed)
+3. **Tier 3 — Keyword Rules**: Supplier+description regex (pre-compiled)
+4. **Tier 4 — Context Refinement**: Code + line_of_service regex (if has_line_of_service)
+5. **Tier 5 — Cost Center Refinement**: Code + cost_center regex (if has_cost_center)
+6. **Tier 6 — Ambiguous Fallback**: Ambiguous codes mapped at reduced confidence
+7. **Tier 7 — Supplier Override**: Post-classification override (L1 pre-filtered, then supplier regex)
 
-Confidence scores (HIGH/MEDIUM) determine final classification quality.
+Unclassified rows are flagged as unmapped for manual review.
+
+## Performance Internals
+
+Key optimizations in the classification engine:
+- All regex patterns are pre-compiled at rule load time (`rule['_compiled']`)
+- `code_row_map`: Pre-computed `category_code.groupby().groups` dict replaces per-rule `isin()` calls
+- Taxonomy level resolution: Single `pd.DataFrame.join()` replaces 5 separate `.map()` calls
+- Tier 7 filters by L1 category before running supplier regex (avoids full-dataset scan)
+- `build_taxonomy_lookup()` uses `set_index().to_dict('index')` instead of `iterrows()`
 
 ## Testing Conventions
 

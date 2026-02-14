@@ -2173,4 +2173,34 @@ Step 8 (reference data authoring) is the largest effort and is primarily manual:
 | D4 | `line_of_service` optional via `None` sentinel | Feature flag in config | Simpler. `cols.get('line_of_service') is not None` is self-documenting. |
 | D5 | Rename output columns globally | Keep old + add new as duplicates | Clean break. Document in changelog. |
 | D6 | Excel input via file extension detection | Require CSV conversion step | UCH data is natively .xlsx. Conversion adds friction and loses sheet metadata. |
+
+---
+
+## Appendix B: Performance Optimizations (Post-Implementation)
+
+The following optimizations were applied after the initial multi-client implementation to improve classification throughput on large datasets (596K+ rows):
+
+### 1. Vectorized Taxonomy Lookup Builder
+`build_taxonomy_lookup()` replaced `iterrows()` with `set_index('Key')[level_cols].to_dict('index')`.
+
+### 2. Pre-Compiled Regex in Classification Loops
+All tier loops (2-7) now pass `rule['_compiled']` (a `re.Pattern` object) to `str.contains()` instead of raw pattern strings, eliminating per-call recompilation.
+
+### 3. Code-to-Row Index Map
+Pre-computed `code_row_map = category_code.groupby(category_code).groups` replaces per-rule `category_code.isin(rule['category_codes'])` scans. For CCHMC (230+ supplier rules x 596K rows), this eliminates ~230 full-series scans.
+
+### 4. Single DataFrame Join for Taxonomy Levels
+Replaced 5 separate `taxonomy_key.map(tax_lN)` calls with a single `taxonomy_key.to_frame().join(tax_levels_df)`, reducing the number of hash lookups from 5N to N.
+
+### 5. Tier 7 L1 Pre-Filter
+Supplier override rules now filter by `cat_l1.isin(override_from_l1)` first, then run supplier regex only on the matching subset (typically <20% of rows).
+
+### Benchmark Results
+
+| Client | Rows | Rules | Classification | Total |
+|--------|------|-------|----------------|-------|
+| CCHMC | 596,796 | 237 supplier + 220 keyword + 19 context/cc + 11 override | 6.0s | ~165s |
+| UCH | 4,649 | 3 supplier + 4 keyword + 1 override | <0.1s | ~2.5s |
+
+Total runtime is I/O-bound (openpyxl Excel writing dominates at ~96% for CCHMC).
 | D7 | `sc_codes` -> `category_codes` alias in rules | Force YAML migration | CCHMC has ~250 rules referencing `sc_codes`. In-place alias avoids mass YAML edits. |

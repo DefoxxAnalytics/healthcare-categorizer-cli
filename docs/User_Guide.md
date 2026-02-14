@@ -154,7 +154,7 @@ Client-specific aggregations defined in `config.yaml` under `aggregations` secti
 
 **Example (UCH):**
 - "Spend by Cost Center"
-- "Spend by Category (Top 30)"
+- "Spend by Category Code (Top 30)"
 
 ### Unmapped Categories Sheet
 
@@ -820,17 +820,24 @@ columns:
 
 ### Performance Issues (Large Datasets)
 
-**Symptom:** Classification takes >5 minutes for 100K+ rows.
+**Symptom:** Total runtime exceeds expectations for large datasets.
 
-**Causes:**
-1. Too many refinement rules (thousands of rules)
-2. Complex regex patterns in rules
-3. Large number of keyword rules
+**Understanding the bottleneck:**
+The classification engine processes ~100K rows/sec. For 596K rows (CCHMC), classification completes in ~6 seconds. Total runtime (~165s) is dominated by Excel I/O — writing 596K rows to multi-sheet XLSX with openpyxl.
 
-**Fix:**
-1. Optimize regex patterns (avoid greedy quantifiers like `.*`)
-2. Reduce number of keyword rules (consolidate similar patterns)
-3. Mark more codes as non-ambiguous (reduces refinement rule evaluations)
-4. Consider upgrading to pandas 2.x for performance improvements
+**Classification is slow (>10s for 100K rows):**
+1. Reduce number of keyword rules (consolidate similar regex patterns)
+2. Mark more codes as non-ambiguous (reduces refinement rule evaluations)
+3. Simplify regex patterns (avoid greedy quantifiers like `.*`)
 
-**Note:** The engine uses vectorized pandas operations and should process 100K rows in 10-30 seconds on modern hardware.
+**Excel writing is slow (>2 minutes):**
+1. This is expected for 500K+ row XLSX output with openpyxl
+2. Reduce output size by filtering to relevant columns in `passthrough`
+3. Consider post-processing: export to CSV for faster I/O, then convert to XLSX separately
+
+**Benchmarks (Windows 11, Python 3.13):**
+
+| Client | Rows | Classification | Total (incl. I/O) |
+|--------|------|----------------|---------------------|
+| CCHMC | 596,796 | 6.0s | ~165s |
+| UCH | 4,649 | <0.1s | ~2.5s |

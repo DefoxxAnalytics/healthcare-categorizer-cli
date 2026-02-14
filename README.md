@@ -69,7 +69,7 @@ clients/
 ```
 healthcare-categorization-cli/
 ├── src/
-│   └── categorize.py           # Main classification engine (685 lines)
+│   └── categorize.py           # Main classification engine (~700 lines)
 ├── tests/
 │   ├── conftest.py             # Pytest fixtures and client-aware test setup
 │   ├── test_rules.py           # Rule-based unit tests (client-specific)
@@ -196,6 +196,24 @@ python src/categorize.py \
   --config clients/cchmc/config.yaml \
   --input clients/cchmc/data/input/monthly_extract_jan2025.csv
 ```
+
+## Performance
+
+The classification engine is fully vectorized with pandas and uses several optimizations for large datasets:
+
+- **Pre-compiled regex**: All rule patterns are compiled once at load time and reused across all tier evaluations
+- **Code-to-row index map**: Category codes are grouped into a lookup map, replacing per-rule `isin()` scans on the full dataset
+- **Single-pass taxonomy join**: Taxonomy level resolution uses one DataFrame join instead of separate lookups per level
+- **Tier 7 L1 pre-filter**: Supplier override regex runs only on rows matching the target L1 category
+
+**Benchmarks (Windows 11, Python 3.13):**
+
+| Client | Rows | Rules | Classification | Total (incl. I/O) |
+|--------|------|-------|----------------|---------------------|
+| CCHMC | 596,796 | 237 supplier + 220 keyword | 6.0s | ~165s |
+| UCH | 4,649 | 3 supplier + 4 keyword | <0.1s | ~2.5s |
+
+Total runtime is dominated by Excel I/O (openpyxl writing). Classification throughput is ~100K rows/sec.
 
 ## Dependencies
 
