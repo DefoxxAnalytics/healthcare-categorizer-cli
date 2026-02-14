@@ -1,27 +1,12 @@
+import sys
 from pathlib import Path
 import pytest
 import yaml
 
 
 ROOT = Path(__file__).parent.parent
-
-PATH_ALIASES = {"sc_mapping": "category_mapping"}
-COLUMN_ALIASES = {"spend_category": "category_source", "line_memo": "description"}
-CLASSIFICATION_ALIASES = {"sc_code_pattern": "category_code_pattern"}
-
-
-def _apply_test_aliases(config):
-    for section, aliases in [
-        ("paths", PATH_ALIASES),
-        ("columns", COLUMN_ALIASES),
-        ("classification", CLASSIFICATION_ALIASES),
-    ]:
-        if section not in config:
-            continue
-        for old, new in aliases.items():
-            if old in config[section] and new not in config[section]:
-                config[section][new] = config[section].pop(old)
-    return config
+sys.path.insert(0, str(ROOT / "src"))
+from categorize import _apply_aliases
 
 
 def pytest_addoption(parser):
@@ -42,7 +27,8 @@ def client_config(client_dir):
     config_path = client_dir / "config.yaml"
     with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
-    return _apply_test_aliases(config)
+    _apply_aliases(config)
+    return config
 
 
 @pytest.fixture(scope="session")

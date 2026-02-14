@@ -19,5 +19,5 @@ cost_center_rules: []
 supplier_override_rules:
   - supplier_pattern: "grainger"
     taxonomy_key: "Facilities > Operating Supplies and Equipment"
-    override_from_l1: "Facilities"
+    override_from_l1: ["Facilities"]
     confidence: 0.90

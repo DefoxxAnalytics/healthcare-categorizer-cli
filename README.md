@@ -98,7 +98,7 @@ Each client's `config.yaml` defines:
 | `paths` | File paths (input, reference files, output) | `input`, `category_mapping`, `taxonomy`, `keyword_rules`, `refinement_rules`, `output_dir`, `output_prefix` |
 | `columns` | Input column mappings | `category_source`, `supplier`, `description`, `line_of_service`, `cost_center`, `amount`, `passthrough` (list) |
 | `classification` | Classification parameters | `category_code_pattern` (regex), `confidence_high` (threshold) |
-| `aggregations` | Custom spend aggregations | `group_by` (column list), `label` |
+| `aggregations` | Custom spend aggregations | `name`, `column`, `top_n` |
 | `input_format` | Input file settings | `sheet_name` (for XLSX files) |
 
 **Optional columns**: `description`, `line_of_service`, `cost_center`. If omitted from config, corresponding classification tiers are skipped.
@@ -225,7 +225,7 @@ pip install -r requirements.txt
 - Input Format: XLSX
 - Volume: 4,600 rows
 - Optional Columns: Description, Cost Center (no Line of Service)
-- Code Pattern: `(\d{8})`
+- Code Pattern: `^(\d+)-`
 
 ## File References
 

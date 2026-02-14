@@ -233,23 +233,27 @@ class TestSupplierClassification:
         mappings = test_assertions.get("known_supplier_mappings", [])
         if not mappings:
             pytest.skip("No known_supplier_mappings in test_assertions.yaml")
+        failures = []
         for entry in mappings:
             code = entry["category_code"]
-            supplier = entry["supplier"]
+            supplier_name = entry["supplier"]
             expected = entry["expected_taxonomy"]
             matched = False
             for rule in refinement["supplier_rules"]:
                 key = _codes_key(rule)
                 if code not in [str(c) for c in rule[key]]:
                     continue
-                if re.search(rule["supplier_pattern"], supplier, re.IGNORECASE):
-                    assert rule["taxonomy_key"] == expected, (
-                        f"Supplier '{supplier}' with {code} mapped to "
-                        f"'{rule['taxonomy_key']}' instead of '{expected}'"
-                    )
+                if re.search(rule["supplier_pattern"], supplier_name, re.IGNORECASE):
+                    if rule["taxonomy_key"] != expected:
+                        failures.append(
+                            f"  '{supplier_name}' ({code}): got '{rule['taxonomy_key']}', "
+                            f"expected '{expected}'"
+                        )
                     matched = True
                     break
-            assert matched, f"No rule matched supplier '{supplier}' with code '{code}'"
+            if not matched:
+                failures.append(f"  '{supplier_name}' ({code}): no matching rule found")
+        assert not failures, f"Supplier mapping failures:\n" + "\n".join(failures)
 
 
 # -- 3. Conflict Detection ----------------------------------------------------

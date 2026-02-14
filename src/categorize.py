@@ -117,7 +117,7 @@ def load_category_mapping(path: Path) -> dict[str, dict]:
     for code, info in data.get('mappings', {}).items():
         code_str = str(code).strip()
         mapping[code_str] = {
-            'name': info['name'],
+            'name': info.get('name', ''),
             'taxonomy_key': info['taxonomy_key'],
             'confidence': info.get('confidence', 0.85),
             'ambiguous': info.get('ambiguous', False),
@@ -268,7 +268,7 @@ def main(config: dict):
 
     print(f"\nLoading {client_name} dataset...")
     input_path = paths['input']
-    if input_path.suffix in ('.xlsx', '.xls'):
+    if input_path.suffix.lower() in ('.xlsx', '.xls'):
         sheet = config.get('input_format', {}).get('sheet_name', 0)
         df = pd.read_excel(input_path, sheet_name=sheet)
     else:
@@ -296,6 +296,16 @@ def main(config: dict):
     if missing_cols:
         raise ConfigError(f"Columns not found in input: {', '.join(missing_cols)}")
 
+    amount_col = cols['amount']
+    if not pd.api.types.is_numeric_dtype(df[amount_col]):
+        df[amount_col] = (
+            df[amount_col].astype(str)
+            .str.replace(r'[$,\s]', '', regex=True)
+            .pipe(pd.to_numeric, errors='coerce')
+            .fillna(0.0)
+        )
+        print(f"  Coerced '{amount_col}' from string to numeric")
+
     # ── Vectorized classification ───────────────────────────────────────
     print("\nClassifying transactions (vectorized)...")
     t_classify = time.perf_counter()
@@ -307,7 +317,7 @@ def main(config: dict):
 
     if has_category_pattern:
         cat_pattern = classif['category_code_pattern']
-        cat_extracted = cat_source_str.str.extract(f'({cat_pattern})', expand=False)
+        cat_extracted = cat_source_str.str.extract(cat_pattern, expand=False)
         if isinstance(cat_extracted, pd.DataFrame):
             cat_extracted = cat_extracted.iloc[:, 0]
         category_code = cat_extracted.fillna(cat_source_str)
@@ -475,6 +485,8 @@ def main(config: dict):
         hit = supplier_hit & l1_hit
         if hit.any():
             cat_info = taxonomy_lookup.get(rule['taxonomy_key'], {})
+            if not cat_info:
+                print(f"  WARNING: Override taxonomy_key '{rule['taxonomy_key']}' not in taxonomy lookup", file=sys.stderr)
             taxonomy_key[hit] = rule['taxonomy_key']
             method[hit] = 'supplier_override'
             confidence[hit] = rule['confidence']
@@ -540,7 +552,7 @@ def main(config: dict):
     unmapped_counts = Counter()
     if method_counts.get('unmapped', 0) > 0:
         unmapped_rows = results_df[results_df['ClassificationMethod'] == 'unmapped']
-        unmapped_counts = Counter(unmapped_rows['Category Source'].tolist())
+        unmapped_counts = Counter(unmapped_rows['Category Code'].tolist())
 
     with pd.ExcelWriter(output_xlsx, engine='openpyxl') as writer:
         results_df.to_excel(writer, sheet_name='All Results', index=False)

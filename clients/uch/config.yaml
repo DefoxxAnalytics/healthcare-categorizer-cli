@@ -50,6 +50,6 @@ aggregations:
   - name: "Spend by Cost Center"
     column: "Cost Center Description"
     top_n: null
-  - name: "Spend by Category (Top 30)"
-    column: "Category Name"
+  - name: "Spend by Category Code (Top 30)"
+    column: "Category Code"
     top_n: 30
